@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] VoicePay</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+   
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/VoicePay.styles.css" asp-append-version="true" />
 </head>
@@ -12,29 +12,7 @@
     <header>
             @await Html.PartialAsync("_StallMenu.cshtml")
     </header>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <nav class="nav">
-        <a href="~/Summary/Index" class="nav__link">
-            <i class="material-icons nav__icon">dashboard</i>
-            <span class="nav__text">Dashboard</span>
-        </a>
-        <a href="#" class="nav__link">
-            <i class="material-icons nav__icon">person</i>
-            <span class="nav__text">Profile</span>
-        </a>
-        <a href="#" class="nav__link">
-            <i class="material-icons nav__icon">done_all</i>
-            <span class="nav__text">Devices</span>
-        </a>
-        <a href="#" class="nav__link">
-            <i class="material-icons nav__icon">lock</i>
-            <span class="nav__text">Privacy</span>
-        </a>
-        <a href="#" class="nav__link">
-            <i class="material-icons nav__icon">settings</i>
-            <span class="nav__text">Settings</span>
-        </a>
-    </nav>
+    
 
     <div class="container">
         <main role="main" class="pb-3">

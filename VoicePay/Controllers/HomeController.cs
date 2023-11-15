@@ -5,20 +5,20 @@ using VoicePay.Models;
 
 namespace VoicePay.Controllers
 {
-	public class HomeController : Controller
-	{
-		private readonly ILogger<HomeController> _logger;
+    public class HomeController : Controller
+    {
+        private readonly ILogger<HomeController> _logger;
 
-		public HomeController(ILogger<HomeController> logger)
-		{
-			_logger = logger;
-		}
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
 
-		public IActionResult Index()
-		{
-			return View();
-		}
-		        [HttpPost]
+        public IActionResult Index()
+        {
+            return View();
+        }
+        [HttpPost]
         public ActionResult StallLogin(IFormCollection formData)
         {
             // Read inputs from textboxes
@@ -43,28 +43,28 @@ namespace VoicePay.Controllers
                 return RedirectToAction("Index");
             }
         }
-		public ActionResult StallMain()
-		{
-			// Stop accessing the action if not logged in
-			// or account not in the "Staff" role
+        public ActionResult StallMain()
+        {
+            // Stop accessing the action if not logged in
+            // or account not in the "Staff" role
 
-			return View();
-		}
-		public ActionResult LogOut()
-		{
-			// Clear all key-values pairs stored in session state
-			// Call the Index action of Home controller
-			return RedirectToAction("Index");
-		}
-		public IActionResult Privacy()
-		{
-			return View();
-		}
+            return View();
+        }
+        public ActionResult LogOut()
+        {
+            // Clear all key-values pairs stored in session state
+            // Call the Index action of Home controller
+            return RedirectToAction("Index");
+        }
+        public IActionResult Privacy()
+        {
+            return View();
+        }
 
-		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-		public IActionResult Error()
-		{
-			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-		}
-	}
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+    }
 }

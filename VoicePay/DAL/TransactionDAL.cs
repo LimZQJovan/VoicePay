@@ -1,6 +1,4 @@
 ﻿using System.Data.SqlClient;
-using System.Xml.Linq;
-using VoicePay.Models;
 
 namespace VoicePay.DAL
 {
