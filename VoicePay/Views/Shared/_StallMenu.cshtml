@@ -1,5 +1,4 @@
-﻿<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-<!-- A grey navbar that expands horizontally at medium device -->
+﻿<!-- A grey navbar that expands horizontally at medium device -->
 <nav class="navbar navbar-expand-md bg-light navbar-light">
 	<!-- The brand(or icon) of the navbar -->
 	<a class="navbar-brand" href="~/Home/StallMain"
@@ -11,28 +10,11 @@
 		me-auto: margin-end, i.e., right margin, auto-adjusted -->
 		<!-- Links that are aligned to the right,
 		 ms-auto: margin-start, i.e., left margin, auto-adjusted -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <nav class="nav">
-        <a href="#" class="nav__link">
-            <i class="material-icons nav__icon">dashboard</i>
-            <span class="nav__text">Dashboard</span>
-        </a>
-        <a href="#" class="nav__link">
-            <i class="material-icons nav__icon">person</i>
-            <span class="nav__text">Profile</span>
-        </a>
-        <a href="#" class="nav__link">
-            <i class="material-icons nav__icon">done_all</i>
-            <span class="nav__text">Devices</span>
-        </a>
-        <a href="#" class="nav__link">
-            <i class="material-icons nav__icon">lock</i>
-            <span class="nav__text">Privacy</span>
-        </a>
-        <a href="#" class="nav__link">
-            <i class="material-icons nav__icon">settings</i>
-            <span class="nav__text">Settings</span>
-        </a>
-    </nav>
+		<ul class="navbar-nav ms-auto">
+			<li class="nav-item">
+				<!-- A link for logging out user -->
+				<a class="nav-link" href="~/Home/LogOut">Log Out</a>
+			</li>
+		</ul>
 	</div>
 </nav>
