@@ -18,7 +18,11 @@ namespace VoicePay.Controllers
 			return View();
 		}
 
-		public IActionResult Privacy()
+        public IActionResult HomePage()
+        {
+            return View();
+        }
+        public IActionResult Privacy()
 		{
 			return View();
 		}

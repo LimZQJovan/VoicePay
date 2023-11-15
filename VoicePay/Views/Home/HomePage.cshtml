@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/VoicePay.styles.css" asp-append-version="true" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    @* @await RenderSectionAsync("Scripts", required: false) *@
 </head>
 <body>
     <header>
@@ -46,7 +46,7 @@
             <span class="nav__text">Profile</span>
         </a>
         <a href="#" class="nav__link">
-            <i class="material-icons nav__icon">done_all</i>
+            <i class="material-icons nav__icon">devices</i>
             <span class="nav__text">Devices</span>
         </a>
         <a href="#" class="nav__link">
@@ -59,23 +59,16 @@
         </a>
     </nav>
 
-    <div class="container">
+    @* <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-    </div>
-
-
-
-
-
-
-
+    </div> *@
 
     @* <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - VoicePay - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+    <div class="container">
+    &copy; 2023 - VoicePay - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>
     </footer> *@
 </body>
 </html>
