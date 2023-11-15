@@ -12,17 +12,36 @@
     <header>
             @await Html.PartialAsync("_StallMenu.cshtml")
     </header>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <nav class="nav">
+        <a href="#" class="nav__link">
+            <i class="material-icons nav__icon">dashboard</i>
+            <span class="nav__text">Dashboard</span>
+        </a>
+        <a href="#" class="nav__link">
+            <i class="material-icons nav__icon">person</i>
+            <span class="nav__text">Profile</span>
+        </a>
+        <a href="#" class="nav__link">
+            <i class="material-icons nav__icon">done_all</i>
+            <span class="nav__text">Devices</span>
+        </a>
+        <a href="#" class="nav__link">
+            <i class="material-icons nav__icon">lock</i>
+            <span class="nav__text">Privacy</span>
+        </a>
+        <a href="#" class="nav__link">
+            <i class="material-icons nav__icon">settings</i>
+            <span class="nav__text">Settings</span>
+        </a>
+    </nav>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - VoicePay - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
