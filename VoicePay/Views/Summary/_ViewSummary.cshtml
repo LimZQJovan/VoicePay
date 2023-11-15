@@ -1,4 +1,13 @@
-﻿@*@model IEnumerable<web_s10247638.Models.Staff>
+﻿@model IEnumerable<VoicePay.Models.Transaction>
+
+
+@foreach (var transaction in Model)
+{
+    using (Html.BeginForm())
+    {
+        @Html.EditorFor(model => transaction.TransactionDateTime, new { htmlAttributes = new { @class = "datepicker" } })
+    }
+}
 
 @if (Model.ToList().Count > 0)
 {
@@ -59,4 +68,4 @@
 else
 {
 	<span style="color:red">No record found!</span>
-}*@
+}
