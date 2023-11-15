@@ -1,71 +1,60 @@
-﻿@model IEnumerable<VoicePay.Models.Transaction>
+﻿@model TransactionViewModel
 
-
-@foreach (var transaction in Model)
+@using (Html.BeginForm())
 {
-    using (Html.BeginForm())
+    <label>
+        @Html.LabelFor(model => model.FilterDate)
+        @Html.EditorFor(model => model.FilterDate, new { htmlAttributes = new { @class = "datepicker" } })
+    </label>
+
+    <label>
+        @Html.LabelFor(model => model.FilterMonth)
+        @Html.DropDownListFor(model => model.FilterMonth, Enumerable.Range(1, 12).Select(x =>
+    new SelectListItem()
     {
-        @Html.EditorFor(model => transaction.TransactionDateTime, new { htmlAttributes = new { @class = "datepicker" } })
-    }
+    Text = x.ToString(),
+    Value = x.ToString()
+    }), "Select Month")
+    </label>
+
+    <label>
+        @Html.LabelFor(model => model.FilterYear)
+        @Html.TextBoxFor(model => model.FilterYear, new { placeholder = "Enter Year" })
+    </label>
+
+    <input type="submit" value="Apply Filter" />
 }
 
-@if (Model.ToList().Count > 0)
+<!-- Display summary based on the selected filters -->
+@if (Model.Transactions != null)
 {
-	<div class="table-responsive">
-		<table id="viewStaff" class="table table-striped table-bordered">
-			<thead class="table-dark">
-				<tr>
-					<th>ID</th>
-					<th>Name</th>
-					<th>Photo</th>
-					<th>Email Address</th>
-					<th>Employment Status</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach (var item in Model)
-				{
-					@*<tr>
-						<td>@item.StaffId.ToString()</td>
-						<td>@item.Name</td>
-						<td>
-							@{
-								string imageFileName = item.Name + ".jpg";
-							}
-							<img src="~/images/@imageFileName"
-								 style="height:50px" />
-						</td>
-						<td>@item.Email</td>
-						<td>
-							@{
-								string employmentStatus;
-								if (item.IsFullTime)
-								{
-									employmentStatus = "Full-Time";
-								}
-								else
-								{
-									employmentStatus = "Part-Time";
-								}
-							}
-							@employmentStatus
-						</td>
-						<td>
-							<a asp-action="Edit" asp-controller="Staff"
-							   asp-route-id="@item.StaffId">Edit</a> |
-							<a asp-action="Details" asp-controller="Staff"
-							   asp-route-id="@item.StaffId">Details</a> |
-							<a asp-action="Delete" asp-controller="Staff"
-							   asp-route-id="@item.StaffId">Delete</a>
-						</td>
-					</tr>*@
-				}
-			</tbody>
-		</table>
-	</div>
+    <table>
+        <!-- Display your table headers here -->
+        @foreach (var transaction in Model.Transactions)
+        {
+            <!-- Display your table rows based on the filtered data -->
+        }
+    </table>
 }
-else
-{
-	<span style="color:red">No record found!</span>
-}
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('form').submit(function (event) {
+            // Prevent the form from submitting normally
+            event.preventDefault();
+
+            // Get the selected values from the form
+            var selectedDate = $('#FilterDate').val();
+            var selectedMonth = $('#FilterMonth').val();
+            var selectedYear = $('#FilterYear').val();
+
+            // Your logic to filter data based on selected filters
+            // For demonstration purposes, alerting the selected values
+            alert("Selected Date: " + selectedDate + "\nSelected Month: " + selectedMonth + "\nSelected Year: " + selectedYear);
+
+            // You can now use these values to filter the data on the client side
+            // Alternatively, you can make an AJAX request to the server to get the filtered data
+        });
+    });
+</script>
