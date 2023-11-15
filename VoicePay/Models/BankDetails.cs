@@ -3,13 +3,13 @@ using System.Xml.Linq;
 
 namespace VoicePay.Models
 {
-	public class Transaction
+	public class BankDetails
 	{
-		public string TransactionID { get; set; }
-		public string ReceiverUEN { get; set; }
-		public string SenderAccountNumber { get; set; }
-		public string Amount { get; set; }
-
+		public string BankName { get; set; }
+		public string BankID { get; set; }
+		public string AccountNumber { get; set; }
+		public string PayeeName { get; set; }
+		public string MobileNo { get; set;}
 
 	}
 }

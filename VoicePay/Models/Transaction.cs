@@ -8,8 +8,10 @@ namespace VoicePay.Models
 		public string TransactionID { get; set; }
 		public string ReceiverUEN { get; set; }
 		public string SenderAccountNumber { get; set; }
-		public string Amount { get; set; }
+		public decimal Amount { get; set; }
 
+		public DateTime TransactionDateTime { get; set; }
+        public string ReferenceNo { get; set; }
 
-	}
+    }
 }
