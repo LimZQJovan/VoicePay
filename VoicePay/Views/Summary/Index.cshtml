@@ -1,0 +1,8 @@
+﻿@model IEnumerable<VoicePay.Models.Staff>
+@{
+	ViewData["Title"] = "View Tramsaction Summary";
+}
+<h4 class="PageTitle">View Tramsaction Summary</h4>
+\<!-- Add a partial view to display a list of staff records
+ in a tabular format. -->
+<partial name="~/Views/Summary/_ViewSummary.cshtml" model="@Model" />
