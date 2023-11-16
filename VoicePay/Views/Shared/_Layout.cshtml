@@ -15,48 +15,20 @@
     <header>
         @await Html.PartialAsync("_StallMenu.cshtml")
     </header>
-
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <nav class="nav">
-        <a href="#" class="nav__link">
-            <i class="material-icons nav__icon">account_balance</i>
-            <span class="nav__text">Transaction</span>
-        </a>
-        <a href="/Home/NumberPad" class="nav__link nav__link--active">
-            <i class="material-icons nav__icon">dialpad</i>
-            <span class="nav__text">Number Pad</span>
-        </a>
-        <a href="/Home/VoicePay" class="nav__link">
-            <i class="material-icons nav__icon">mic</i>
-            <span class="nav__text">VoicePay</span>
-        </a>
-        <a href="#" class="nav__link">
-            <i class="material-icons nav__icon">account_balance_wallet</i>
-            <span class="nav__text">Bank</span>
-        </a>
-        <a href="/Home/Language" class="nav__link">
-            <i class="material-icons nav__icon">language</i>
-            <span class="nav__text">Language</span>
-        </a>
-    </nav>
-
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-
-
-
-
-
-
-
-    @* <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2023 - VoicePay - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer> *@
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
