@@ -93,7 +93,6 @@ namespace VoicePay.Controllers
             int dtYear = selectedYear == -1 ? DateTime.Now.Year : selectedYear;
             int dtMonth = selectedMonth;
             int dtDay = selectedDay;
-
             UEN = HttpContext.Session.GetString("UEN");
             List<Transaction> transactionList = transactionContext.GetTransactions(UEN, dtYear, dtMonth, dtDay);
             return View(transactionList);

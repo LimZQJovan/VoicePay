@@ -24,35 +24,7 @@ namespace VoicePay.DAL
 
         public List<Transaction> GetTransactions(string UEN, int dtYear, int dtMonth, int dtDay)
         {
-            ////Create a SqlCommand object from connection object
-            //SqlCommand cmd = conn.CreateCommand();
-
-            //// Specify the SELECT SQL statement
-            //cmd.CommandText = @"SELECT b.PayeeName, b.MobileNo, t.SenderAccountNumber, t.Amount, t.TransactionDateTime
-            //   FROM TransactionDetails t
-            //   INNER JOIN Stall s
-            //   ON s.UEN = t.ReceiverUEN
-            //   INNER JOIN BankDetails b
-            //   ON b.AccountNumber = t.SenderAccountNumber
-            //   WHERE t.ReceiverUEN = @UEN
-            //   AND YEAR(TransactionDateTime) = @dtYear";
-
-            //// Add parameters for month and day if provided
-            //if (dtMonth != -1)
-            //{
-            //    cmd.CommandText += " AND MONTH(TransactionDateTime) = @dtMonth";
-            //    cmd.Parameters.AddWithValue("@dtMonth", dtMonth);
-            //}
-
-            //if (dtDay != -1)
-            //{
-            //    cmd.CommandText += " AND DAY(TransactionDateTime) = @dtDay";
-            //    cmd.Parameters.AddWithValue("@dtDay", dtDay);
-            //}
-
-            //cmd.Parameters.AddWithValue("@UEN", UEN);
-            //cmd.Parameters.AddWithValue("@dtYear", dtYear);
-
+            //Create a SqlCommand object from connection object
             SqlCommand cmd = conn.CreateCommand();
 
             // Specify the SELECT SQL statement
@@ -63,10 +35,37 @@ namespace VoicePay.DAL
                INNER JOIN BankDetails b
                ON b.AccountNumber = t.SenderAccountNumber
                WHERE t.ReceiverUEN = @UEN
-               AND CONVERT(DATE, TransactionDateTime) = CONVERT(DATE, GETDATE())";
+               AND YEAR(TransactionDateTime) = @dtYear";
 
+            // Add parameters for month and day if provided
+            if (dtMonth != -1)
+            {
+                cmd.CommandText += " AND MONTH(TransactionDateTime) = @dtMonth";
+                cmd.Parameters.AddWithValue("@dtMonth", dtMonth);
+            }
+
+            if (dtDay != -1)
+            {
+                cmd.CommandText += " AND DAY(TransactionDateTime) = @dtDay";
+                cmd.Parameters.AddWithValue("@dtDay", dtDay);
+            }
 
             cmd.Parameters.AddWithValue("@UEN", UEN);
+            cmd.Parameters.AddWithValue("@dtYear", dtYear);
+
+            //SqlCommand cmd = conn.CreateCommand();
+            //// Specify the SELECT SQL statement
+            //cmd.CommandText = @"SELECT b.PayeeName, b.MobileNo, t.Amount, t.TransactionDateTime, t.ReferenceNumber
+            //   FROM TransactionDetails t
+            //   INNER JOIN Stall s
+            //   ON s.UEN = t.ReceiverUEN
+            //   INNER JOIN BankDetails b
+            //   ON b.AccountNumber = t.SenderAccountNumber
+            //   WHERE t.ReceiverUEN = @UEN
+            //   AND CONVERT(DATE, TransactionDateTime) = CONVERT(DATE, GETDATE())";
+
+
+            //cmd.Parameters.AddWithValue("@UEN", UEN);
             // Open a database connection
             conn.Open();
 
