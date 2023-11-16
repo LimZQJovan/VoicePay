@@ -1,4 +1,4 @@
-﻿@model IEnumerable<VoicePay.Models.Transaction>
+﻿@model List<VoicePay.Models.Transaction>
 @{
 	ViewData["Title"] = "View Tramsaction Summary";
 }
@@ -14,9 +14,9 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 <body>
-    
 
-    <form action="/filterData" method="post">
+
+@*    <form action="/ReportController/ViewReport" method="post">
         <div class="date-filters">
             <label for="day-select">Day:</label>
             <select id="day-select" name="selectedDay">
@@ -82,10 +82,11 @@
         </div>
 
         <button type="submit">Filter Data</button>
-    </form>
+    </form>*@
 
 </body>
 </html>
+
 <!-- Add a partial view to display a list of staff records
  in a tabular format. -->
 <partial name="_ViewReport.cshtml" model="@Model" />

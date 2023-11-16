@@ -5,10 +5,12 @@ using VoicePay.Models;
 
 namespace VoicePay.Controllers
 {
+    
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
+        private readonly ILogger<HomeController> _logger;
+        TransactionDAL transactionContext = new TransactionDAL();
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -36,9 +38,6 @@ namespace VoicePay.Controllers
                 HttpContext.Session.SetString("UEN", UEN);
                 HttpContext.Session.SetString("Name", stallName);
                 HttpContext.Session.SetString("Location", location);
-
-                // Store Login ID in session with the key "LoginID"
-                // Store user role "Staff" as a string in session with the key "Role"
                 // Redirect user to the "StaffMain" view through an action
                 return RedirectToAction("Report");
             }
@@ -74,9 +73,15 @@ namespace VoicePay.Controllers
 			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 		}
 
-        public ActionResult Report()   
+        public ActionResult Report(string UEN, int selectedYear, int selectedMonth, int selectedDay)
         {
-            return View("Report");
+            int dtYear = selectedYear == -1 ? DateTime.Now.Year : selectedYear;
+            int dtMonth = selectedMonth;
+            int dtDay = selectedDay;
+
+            UEN = HttpContext.Session.GetString("UEN");
+            List<Transaction> transactionList = transactionContext.GetTransactions(UEN, dtYear, dtMonth, dtDay);
+            return View(transactionList);
         }
         public ActionResult Language()
         {
