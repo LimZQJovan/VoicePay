@@ -27,19 +27,19 @@ namespace VoicePay.Controllers
             // Email address converted to lowercase
             string loginID = formData["txtLoginID"].ToString().ToLower();
             string password = formData["txtPassword"].ToString();
-            string UEN = "";
-            string stallName = "";
-            string location = "";
+            //string UEN = "";
+            //string stallName = "";
+            //string location = "";
 
             StaffDAL staffContext = new StaffDAL();
 
-            if (staffContext.Login(loginID, password, out UEN, out stallName, out location))
+            if (staffContext.Login(loginID, password))
             {
                 HttpContext.Session.SetString("UEN", UEN);
                 HttpContext.Session.SetString("Name", stallName);
                 HttpContext.Session.SetString("Location", location);
                 // Redirect user to the "StaffMain" view through an action
-                return RedirectToAction("Report");
+                return RedirectToAction("StallMain");
             }
             else
             {
@@ -56,7 +56,22 @@ namespace VoicePay.Controllers
 
 			return View();
 		}
-		public ActionResult LogOut()
+
+        public ActionResult Language()
+        {
+            return View("Language");
+        }
+
+        public ActionResult NumberPad()
+        {
+            return View("NumberPad");
+        }
+
+        public ActionResult VoicePay()
+        {
+            return View("VoicePay");
+        }
+        public ActionResult LogOut()
 		{
 			// Clear all key-values pairs stored in session state
 			// Call the Index action of Home controller
@@ -82,25 +97,6 @@ namespace VoicePay.Controllers
             UEN = HttpContext.Session.GetString("UEN");
             List<Transaction> transactionList = transactionContext.GetTransactions(UEN, dtYear, dtMonth, dtDay);
             return View(transactionList);
-        }
-        public ActionResult Language()
-        {
-            return View("Language");
-        }
-
-        public ActionResult BankDetail()
-        {
-            return View("BankDetail");
-        }
-
-        public ActionResult NumberPad()
-        {
-            return View("NumberPad");
-        }
-
-        public ActionResult VoicePay()
-        {
-            return View("VoicePay");
         }
     }
 }

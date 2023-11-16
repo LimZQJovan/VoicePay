@@ -20,11 +20,8 @@ namespace VoicePay.DAL
             //Connection String read.
             conn = new SqlConnection(strConn);
         }
-        public bool Login(string loginId, string password, out string UEN, out string Stallname, out string location)
+        public bool Login(string loginId, string password)
         {
-            UEN = "";
-            Stallname = "";
-            location = "";
             bool authenticated = false;
             //Create a SqlCommand object from connection object
             SqlCommand cmd = conn.CreateCommand();
@@ -39,12 +36,9 @@ namespace VoicePay.DAL
             {
                 // Convert email address to lowercase for comparison
                 // Password comparison is case-sensitive
-                if ((reader.GetString(3).ToLower() == loginId) &&
-                (reader.GetString(4) == password))
+                if ((reader.GetString(2).ToLower() == loginId) &&
+                (reader.GetString(3) == password))
                 {
-                    UEN = reader.GetString(0);
-                    Stallname = reader.GetString(1);
-                    location = reader.GetString(2);
                     authenticated = true;
                     break; // Exit the while loop
                 }
