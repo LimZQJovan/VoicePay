@@ -1,32 +1,35 @@
 ﻿@model List<VoicePay.Models.Transaction>
 
-<h2>Assigned Parcels</h2>
+<h2>Transactions details</h2>
 
 @if (Model != null && Model.Count > 0)
 {
-    <span style="color:red;">@TempData["Message"]</span>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Parcel ID</th>
-                    <th>Item Description</th>
-                    <th>Receiver Name</th>
-                    <th>Receiver TelNo</th>
-                    <th>Delivery Address</th>
-                    <th>To City</th>
-                    <th>To Country</th>
-                    <th>Parcel Weight</th>
-                    <th>Delivery Charge</th>
-                    <th>Currency</th>
-                    <th>Delivery Status</th>
+                    <th>Payee Name</th>
+                    <th>Tel No</th>
+                    <th>Amount</th>
+                    <th>Reference No</th>
                     <th></th>
                 </tr>
             </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>@item.Payee</td>
+                    <td>@item.PayeeTelNo</td>
+                    <td>@item.Amount</td>
+                    <td>@item.ReferenceNo</td>
+                </tr>
+                }
+            </tbody>
         </table>
     </div>
 }
 else
 {
-    <span style="color:red">No assigned parcel found!</span>
+    <span style="color:red">No transaction found!</span>
 }
