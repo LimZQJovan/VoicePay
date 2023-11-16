@@ -43,20 +43,35 @@ namespace VoicePay.Controllers
                 return RedirectToAction("Index");
             }
         }
-		public ActionResult StallMain()
-		{
-			// Stop accessing the action if not logged in
-			// or account not in the "Staff" role
-
-		public IActionResult Privacy()
-		{
-			return View();
-		}
-
+        public ActionResult StallMain()
+        {
+            // Stop accessing the action if not logged in
+            // or account not in the "Staff" role
+            return View();
+        }
+        public ActionResult LogOut()
+        {
+            return RedirectToAction("Index");
+        }
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
 		{
 			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 		}
-	}
+
+        public ActionResult Language()
+        {
+            return View("Language");
+        }
+
+        public ActionResult NumberPad()
+        {
+            return View("NumberPad");
+        }
+
+        public ActionResult VoicePay()
+        {
+            return View("VoicePay");
+        }
+    }
 }

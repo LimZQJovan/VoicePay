@@ -98,12 +98,13 @@ body {
         background-color: #eeeeee;
     }
 
-.nav__link--active {
+/*.nav__link--active {
     color: #009578;
-}
+}*/
 
 .nav__icon {
     font-size: 18px;
 }
+
 
 

@@ -13,49 +13,30 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">VoicePay</a>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        @await Html.PartialAsync("_StallMenu.cshtml")
     </header>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <nav class="nav">
         <a href="#" class="nav__link">
-            <i class="material-icons nav__icon">dashboard</i>
-            <span class="nav__text">Dashboard</span>
+            <i class="material-icons nav__icon">account_balance</i>
+            <span class="nav__text">Transaction</span>
         </a>
-        <a href="#" class="nav__link nav__link--active">
-            <i class="material-icons nav__icon">person</i>
-            <span class="nav__text">Profile</span>
+        <a href="/Home/NumberPad" class="nav__link nav__link--active">
+            <i class="material-icons nav__icon">dialpad</i>
+            <span class="nav__text">Number Pad</span>
         </a>
-        <a href="#" class="nav__link">
-            <i class="material-icons nav__icon">done_all</i>
-            <span class="nav__text">Devices</span>
-        </a>
-        <a href="#" class="nav__link">
-            <i class="material-icons nav__icon">lock</i>
-            <span class="nav__text">Privacy</span>
+        <a href="/Home/VoicePay" class="nav__link">
+            <i class="material-icons nav__icon">mic</i>
+            <span class="nav__text">VoicePay</span>
         </a>
         <a href="#" class="nav__link">
-            <i class="material-icons nav__icon">settings</i>
-            <span class="nav__text">Settings</span>
+            <i class="material-icons nav__icon">account_balance_wallet</i>
+            <span class="nav__text">Bank</span>
+        </a>
+        <a href="/Home/Language" class="nav__link">
+            <i class="material-icons nav__icon">language</i>
+            <span class="nav__text">Language</span>
         </a>
     </nav>
 

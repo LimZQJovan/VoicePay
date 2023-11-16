@@ -1,0 +1,87 @@
+/*body {
+    background: #1a1a1a;
+    display: flex;
+    height: 100vh ;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.microphone {
+    background: #5fb5fe;
+    width: 140px;
+    height: 140px;
+    border-radius: 80%;
+    cursor: pointer;
+}
+
+.circle {
+    width: 23px;
+    height: 45px;
+    background: #fff;
+    position: absolute;
+    border-radius: 20px;
+    top: auto;
+    left: auto;
+    transform: translate(-50%, -50%);
+}
+
+.circle::before {
+    content: ')';
+    position: absolute;
+    bottom: -43px;
+    left: 8px;
+    transform: rotate(90deg);
+    font: 50px cursive;*/
+    /*color: #fffff; default */
+/*}
+
+    .circle::after {
+        content: '|';
+        position: absolute;
+        bottom: -35px;
+        left: 8px;
+        font-weight: 1000;
+        font: 20px cursive;*/
+        /*color: #fffff; default */
+    /*}
+    .microphone:hover > .circle {
+        background: #555;
+        color: #555;    
+    }*/
+
+/* Styles for the container */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+}
+
+/* Styles for the circular button */
+.circular-button {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #3498db;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    line-height: 100px;
+    border: none;
+    cursor: pointer;
+}
+
+    /* Icon styles */
+    .circular-button i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* Hover effect */
+    .circular-button:hover {
+        background-color: #2980b9;
+    }
