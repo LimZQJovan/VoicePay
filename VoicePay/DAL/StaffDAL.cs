@@ -59,5 +59,22 @@ namespace VoicePay.DAL
 
             return authenticated;
         }
+
+        public string GetUEN(string LoginID)
+        {
+            SqlCommand cmd = conn.CreateCommand();
+
+            // Specify the SELECT SQL statement
+            cmd.CommandText = @"SELECT UEN FROM Stall WHERE LoginID = @login";
+            cmd.Parameters.AddWithValue("@login", LoginID);
+
+            // Open a database connection
+            conn.Open();
+
+            // Execute the SELECT SQL through a DataReader
+            string UEN = cmd.ExecuteScalar()?.ToString();
+
+            return UEN;
+        }
     }
 }

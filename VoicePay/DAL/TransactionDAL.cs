@@ -93,5 +93,27 @@ namespace VoicePay.DAL
 
             return transactionList;
         }
+
+        public void AddTransaction(string ReceiverUEN, string SenderAccountNumber, float Amount, DateTime TransactionDateTime, string ReferenceNo)
+        {
+            SqlCommand cmd = conn.CreateCommand();
+
+            cmd.CommandText = @"INSERT INTO TransactionDetails(ReceiverUEN, SenderAccountNumber, Amount, TransactionDateTime, ReferenceNumber)
+								VALUES(@ReceiverUEN, @SenderAccountNumber, @Amount, @TransactionDateTime, @ReferenceNumber)";
+
+            cmd.Parameters.AddWithValue("@ReceiverUEN", ReceiverUEN);
+            cmd.Parameters.AddWithValue("@SenderAccountNumber", SenderAccountNumber);
+            cmd.Parameters.AddWithValue("@Amount", Amount);
+            cmd.Parameters.AddWithValue("@TransactionDateTime", TransactionDateTime);
+            cmd.Parameters.AddWithValue("@ReferenceNumber", ReferenceNo);
+
+            conn.Open();
+
+            cmd.ExecuteScalar();
+
+            conn.Close();
+
+            return;
+        }
     }
 }
