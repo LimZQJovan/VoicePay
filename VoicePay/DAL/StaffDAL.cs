@@ -20,8 +20,9 @@ namespace VoicePay.DAL
             //Connection String read.
             conn = new SqlConnection(strConn);
         }
-        public bool Login(string loginId, string password)
+        public bool Login(string loginId, string password, out string UEN)
         {
+            UEN = "";
             bool authenticated = false;
             //Create a SqlCommand object from connection object
             SqlCommand cmd = conn.CreateCommand();
@@ -39,6 +40,7 @@ namespace VoicePay.DAL
                 if ((reader.GetString(2).ToLower() == loginId) &&
                 (reader.GetString(3) == password))
                 {
+                    UEN = reader.GetString(0);
                     authenticated = true;
                     break; // Exit the while loop
                 }

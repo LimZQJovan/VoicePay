@@ -25,11 +25,12 @@ namespace VoicePay.Controllers
             // Email address converted to lowercase
             string loginID = formData["txtLoginID"].ToString().ToLower();
             string password = formData["txtPassword"].ToString();
+            string UEN = "";
             StaffDAL staffContext = new StaffDAL();
 
-            if (staffContext.Login(loginID, password))
+            if (staffContext.Login(loginID, password, out UEN))
             {
-
+                HttpContext.Session.SetString("UEN", UEN);
                 // Store Login ID in session with the key "LoginID"
                 // Store user role "Staff" as a string in session with the key "Role"
                 // Redirect user to the "StaffMain" view through an action

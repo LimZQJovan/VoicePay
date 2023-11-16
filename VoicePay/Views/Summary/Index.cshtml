@@ -3,6 +3,33 @@
 	ViewData["Title"] = "View Tramsaction Summary";
 }
 <h4 class="PageTitle">View Tramsaction Summary</h4>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Picker Example</title>
+    <!-- Include flatpickr CSS and JS files -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</head>
+<body>
+
+    <label for="date-picker">Select Date:</label>
+    <input type="text" id="date-picker">
+
+    <script>
+        flatpickr("#date-picker", {
+            dateFormat: "Y-m-d",
+            altInput: true,
+            altFormat: "F j, Y",
+            mode: "single",
+            minDate: "today",
+        });
+    </script>
+
+</body>
+</html>
 \<!-- Add a partial view to display a list of staff records
  in a tabular format. -->
 <partial name="~/Views/Summary/_ViewSummary.cshtml" model="@Model" />
