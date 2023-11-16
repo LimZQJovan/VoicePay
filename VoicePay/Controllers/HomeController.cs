@@ -25,7 +25,7 @@ namespace VoicePay.Controllers
             // Email address converted to lowercase
             string loginID = formData["txtLoginID"].ToString().ToLower();
             string password = formData["txtPassword"].ToString();
-            string UEN = "";
+            string UEN;
             StaffDAL staffContext = new StaffDAL();
 
             if (staffContext.Login(loginID, password, out UEN))
