@@ -25,22 +25,19 @@ namespace VoicePay.Controllers
             // Email address converted to lowercase
             string loginID = formData["txtLoginID"].ToString().ToLower();
             string password = formData["txtPassword"].ToString();
-            string UEN = "";
-            string stallName = "";
-            string location = "";
+            //string UEN = "";
+            //string stallName = "";
+            //string location = "";
 
             StaffDAL staffContext = new StaffDAL();
 
-            if (staffContext.Login(loginID, password, out UEN, out stallName, out location))
+            if (staffContext.Login(loginID, password))
             {
-                HttpContext.Session.SetString("UEN", UEN);
-                HttpContext.Session.SetString("Name", stallName);
-                HttpContext.Session.SetString("Location", location);
 
                 // Store Login ID in session with the key "LoginID"
                 // Store user role "Staff" as a string in session with the key "Role"
                 // Redirect user to the "StaffMain" view through an action
-                return RedirectToAction("Report");
+                return RedirectToAction("StallMain");
             }
             else
             {
@@ -92,25 +89,6 @@ namespace VoicePay.Controllers
         public ActionResult Report()   
         {
             return View("Report");
-        }
-        public ActionResult Language()
-        {
-            return View("Language");
-        }
-
-        public ActionResult BankDetail()
-        {
-            return View("BankDetail");
-        }
-
-        public ActionResult NumberPad()
-        {
-            return View("NumberPad");
-        }
-
-        public ActionResult VoicePay()
-        {
-            return View("VoicePay");
         }
     }
 }
