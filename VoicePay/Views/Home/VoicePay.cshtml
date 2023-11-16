@@ -1,36 +1,221 @@
-﻿@* <!DOCTYPE html>
-<html>
-<head>
-    <!-- Use Unicode character encoding - multi-language compatibility -->
-    <meta charset="utf-8">
-
-    <!-- Set the initial view zooming scale for mobile device -->
-    <meta name="viewport" content="width = device-width,
- initial-scale = 1" />
-    <title>VoicePay</title>
-    <link rel="stylesheet" type="text/css" href="~/css/VoicePay.css">
-</head>
-<body>
-    <div class="michrophone" title="Click to record">
-        <div class="circle"></div>
-
-    </div>
-</body>
-</html> *@
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Circular Button with Mic Icon</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Recognition, Translation, and Decimal Conversion</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="~/css/VoicePay.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <button class="circular-button">
-            <i class="fas fa-microphone"></i>
-        </button>
+
+    <div id="confirmation" style="display:none;">
+        <!-- Confirmation content -->
+        <p id="confirmation-content"></p>
+        <button id="confirmButton">Confirm</button>
     </div>
+
+    <div class="container">
+        <button class="circular-button" id="startButton">
+            <i class="fas fa-microphone" id="mic-icon"></i>
+        </button>
+        <label for="languageSelect">Select Language:</label>
+        <select id="languageSelect">
+            <option value="en-US">English (US)</option>
+            <option value="zh-CN">Chinese (Simplified)</option>
+            <!-- Add more language options as needed -->
+        </select>
+    </div>
+
+
+
+    <script>
+        function showConfirmation(decimalAmount) {
+            // Display a confirmation message on the page
+            const confirmationContent = `Confirm?\n\n$${decimalAmount}`;
+            document.getElementById('confirmation-content').innerHTML = confirmationContent;
+            document.getElementById('confirmation').style.display = 'block';
+            const confirmButton = document.getElementById('confirmButton');
+            confirmButton.addEventListener('click', () => {
+                confirmDecimal(decimalAmount);
+            });
+        }
+
+        function confirmDecimal(decimalAmount) {
+            // Handle the user's confirmation
+            // You can add further actions here if needed
+            document.getElementById('confirmation').style.display = 'none';
+            let valueToPass = decimalAmount;
+            console.log(decimalAmount);
+            window.location.href = '/Home/QR?amount=' + valueToPass;
+        }
+
+        const startButton = document.getElementById('startButton');
+        const decimalContainer = document.getElementById('decimalContainer');
+        const languageSelect = document.getElementById('languageSelect');
+        let recognition;
+
+        startButton.addEventListener('click', () => {
+            startRecording();
+        });
+
+        function startRecording() {
+            const selectedLanguage = languageSelect.value;
+
+            recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = selectedLanguage;
+            recognition.start();
+
+            // Event handler for recognition result
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                console.log('Recognized:', transcript);
+
+                // Display transcript on the screen
+
+                if (selectedLanguage !== 'en-US') {
+                    // Translate and display
+                    translate(transcript, selectedLanguage, 'en');
+                } else {
+                    // Convert to decimal and display
+                    const decimalAmount = convertToDecimal(transcript);
+                    console.log('Decimal Amount:', decimalAmount);
+
+                    // Show confirmation message with QR code
+                    showConfirmation(decimalAmount);
+                }
+            };
+
+            // Event handler for end of speech
+            recognition.onend = () => {
+                console.log('Speech ended');
+            };
+
+            // Event handler for error during recognition
+            recognition.onerror = (event) => {
+                console.error('Speech recognition error:', event.error);
+            };
+        }
+
+        function translate(text, sourceLang, targetLang) {
+            // Replace 'YOUR_API_KEY' with your actual Google Translate API key
+            const apiKey = 'AIzaSyBlC5Q3M4GEAgVuyTR_DHU7W97bFDFHLiw';
+            const apiUrl = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
+
+            $.ajax({
+                url: apiUrl,
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    q: text,
+                    source: sourceLang,
+                    target: targetLang,
+                    format: 'text'
+                }),
+                success: (response) => {
+                    const translatedText = response.data.translations[0].translatedText;
+                    console.log('Translated:', translatedText);
+
+                    // Display translated text on the screen
+
+                    // Convert translated amount to decimal and display
+                    const decimalAmount = convertToDecimal(translatedText);
+                    console.log('Decimal Amount:', decimalAmount);
+                    showConfirmation(decimalAmount);
+                },
+                error: (error) => {
+                    console.error('Translation error:', error.responseText);
+                }
+            });
+        }
+
+        function convertToDecimal(transcript) {
+            // Split the transcript into individual words
+            const words = transcript.split(' ');
+
+            // Convert each word to lowercase in the original array
+            words.forEach((word, index) => {
+                words[index] = word.toLowerCase();
+            });
+
+            const numberWords = {
+                zero: 0,
+                one: 1,
+                two: 2,
+                three: 3,
+                four: 4,
+                five: 5,
+                six: 6,
+                seven: 7,
+                eight: 8,
+                nine: 9,
+                ten: 10,
+                eleven: 11,
+                twelve: 12,
+                thirteen: 13,
+                fourteen: 14,
+                fifteen: 15,
+                sixteen: 16,
+                seventeen: 17,
+                eighteen: 18,
+                nineteen: 19,
+                twenty: 20,
+                thirty: 30,
+                forty: 40,
+                fifty: 50,
+                sixty: 60,
+                seventy: 70,
+                eighty: 80,
+                ninety: 90
+            };
+
+            let dollars = 0;
+            let cents = 0;
+
+            // Parse the words to extract dollars and cents
+            // Parse the words to extract dollars and cents
+            for (let i = 0; i < words.length; i++) {
+                if (words[i] === 'dollars' || words[i] === 'dollar' || words[i] === 'yuan' || words[i] === 'pieces') {
+                    if (words[i] === 'yuan' || words[i] === 'pieces') {
+                        // Handle multiplication for yuan
+                        dollars = parseFloat(words[i - 1]);
+                        if (isNaN(dollars))
+                            dollars = parseFloat(numberWords[words[i - 1]]);
+                        console.log(dollars);
+                        for (i = 1; i <= 4; i++) {
+                            if (words[i] in numberWords) {
+                                cents = parseFloat(numberWords[words[i]]) * 10;
+                                console.log(cents);
+                            }
+                        }
+                        break
+                    } else {
+                        dollars = parseFloat(words[i - 1]);
+                        if (isNaN(dollars))
+                            dollars = parseFloat(numberWords[words[i - 1]]);
+                        cents = parseFloat(words[i + 1]);
+                        if (isNaN(cents))
+                            cents = parseFloat(numberWords[words[i + 1]]);
+                        if (isNaN(cents))
+                            cents = 0;
+                    }
+                }
+            }
+
+            // Combine dollars and cents into a decimal amount
+            const decimalAmount = dollars + cents / 100;
+            console.log(dollars, cents);
+            return decimalAmount.toFixed(2); // Format to two decimal places
+        }
+
+        // Stop recording when the button is clicked again
+        startButton.addEventListener('dblclick', () => {
+            if (recognition) {
+                recognition.stop();
+            }
+        });
+    </script>
 </body>
 </html>
