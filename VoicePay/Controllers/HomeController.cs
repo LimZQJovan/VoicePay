@@ -11,6 +11,7 @@ namespace VoicePay.Controllers
 
         private readonly ILogger<HomeController> _logger;
         TransactionDAL transactionContext = new TransactionDAL();
+        StaffDAL staffContext = new StaffDAL();
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -110,9 +111,12 @@ namespace VoicePay.Controllers
 
         public ActionResult Confirm()
         {
+            float amount = float.TryParse(HttpContext.Session.GetString("amount"), out float parsedAmount) ? parsedAmount : 0.0f;
+            transactionContext.AddTransaction(HttpContext.Session.GetString("UEN"), "5501234567", amount, DateTime.Now, "BNKREF6543210987");
             ViewData["amount"] = HttpContext.Session.GetString("amount");
             return View("Confirm");
         }
+
 
     }
 }
