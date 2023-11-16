@@ -7,28 +7,79 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/VoicePay.styles.css" asp-append-version="true" />
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    @await RenderSectionAsync("Scripts", required: false)
 </head>
 <body>
     <header>
         @await Html.PartialAsync("_StallMenu.cshtml")
     </header>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- A grey navbar that expands horizontally at medium device -->
+    <ul>
+        <li><a class="active" href="/Home/StallMain" style="font-size: 30px">HawkPAY</a></li>
+        <li class="nav-item">
+            <!-- A link for logging out user -->
+            <a class="nav-link" href="~/Home/LogOut">
+                <i class="material-icons nav__icon" style="color: white">logout</i>
+                <span class="nav__text"></span>
+            </a>
+        </li>
+    </ul>
+        <!-- Toggle/collapsible Button, also known as hamburger button -->
+        <!-- Links in the navbar, displayed as drop-down list when collapsed -->
+        <!-- Links that are aligned to the left,
+        me-auto: margin-end, i.e., right margin, auto-adjusted -->
+        <!-- Links that are aligned to the right,
+         ms-auto: margin-start, i.e., left margin, auto-adjusted -->
+        @* <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <!-- A link for logging out user -->
+                <a class="nav-link" href="~/Home/LogOut">
+                    <i class="material-icons nav__icon">logout</i>
+                    <span class="nav__text"></span>
+                </a>
+            </li>
+        </ul> *@
+    <nav class="nav">
+        @*        <a href="#" class="nav__link" id="logoutLink">
+        <i class="material-icons nav__icon">summarize</i>
+        <span class="nav__text">Report</span>
+        </a>*@
+        <a href="#" class="nav__link">
+            <i class="material-icons nav__icon">summarize</i>
+            <span class="nav__text">Report</span>
+        </a>
+        <a href="/Home/NumberPad" class="nav__link">
+            <i class="material-icons nav__icon">dialpad</i>
+            <span class="nav__text">Number Pad</span>
+        </a>
+        <a href="/Home/VoicePay" class="nav__link">
+            <i class="material-icons nav__icon">mic</i>
+            <span class="nav__text">Voice</span>
+        </a>
+        <a href="#" class="nav__link">
+            <i class="material-icons nav__icon">account_balance_wallet</i>
+            <span class="nav__text">Bank Detail</span>
+        </a>
+        <a href="/Home/Language" class="nav__link">
+            <i class="material-icons nav__icon">language</i>
+            <span class="nav__text">Language</span>
+        </a>
+    </nav>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - VoicePay - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    @*    <script>
+    document.getElementById('logoutLink').addEventListener('click', function () {
+    window.location.href = 'Logout';
+    });
+    </script>*@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

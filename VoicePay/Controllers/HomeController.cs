@@ -50,7 +50,22 @@ namespace VoicePay.Controllers
 
 			return View();
 		}
-		public ActionResult LogOut()
+
+        public ActionResult Language()
+        {
+            return View("Language");
+        }
+
+        public ActionResult NumberPad()
+        {
+            return View("NumberPad");
+        }
+
+        public ActionResult VoicePay()
+        {
+            return View("VoicePay");
+        }
+        public ActionResult LogOut()
 		{
 			// Clear all key-values pairs stored in session state
 			// Call the Index action of Home controller

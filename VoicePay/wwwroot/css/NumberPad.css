@@ -1,9 +1,9 @@
-* {
+/** {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
-}
+}*/
 
 
 /*.container {
@@ -15,7 +15,7 @@
     justify-content: center;
 }*/
 
-.calculator {
+/*.calculator {
     background: #3a4452;
     padding: 20px;
     border-radius: 10px;
@@ -63,29 +63,137 @@ form input.equal {
 
 form input.operator {
     color: #33ffd8;
-}
+}*/
 
 /* Media query for smaller screens */
-@media screen and (max-width: 400px) {
+/*@media screen and (max-width: 400px) {
     .calculator {
-        width: 500px; /* Adjust width for smaller screens */
-        max-width: none; /* Remove max-width for smaller screens */
-        height: 1000px;
+        width: 500px;*/ /* Adjust width for smaller screens */
+        /*max-width: none;*/ /* Remove max-width for smaller screens */
+        /*height: 1000px;
         padding-right: 100px;
     }
 
         .calculator form input {
-            width: 25%; /* Adjust button width for smaller screens */
-            font-size: 16px; /* Adjust font size for smaller screens */
-            height: 90px;
+            width: 25%;*/ /* Adjust button width for smaller screens */
+            /*font-size: 16px;*/ /* Adjust font size for smaller screens */
+            /*height: 90px;
             padding-right: 40px;    
         }
 
     form input.equal {
-        width: 50%; /* Adjust equals button width for smaller screens */
-    }
+        width: 50%;*/ /* Adjust equals button width for smaller screens */
+    /*}
 
     form .display input {
-        font-size: 25px; /* Adjust font size for smaller screens */
+        font-size: 25px;*/ /* Adjust font size for smaller screens */
+    /*}
+}*/
+
+
+/*.container {
+    width: 100%;
+    height: 100px;
+    background: #e3f9ff;
+    display: flow;
+    align-items: center;
+    justify-content: center;
+}*/
+
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+
+/*.container {
+    width: 100%;
+    height: 100px;
+    background: #e3f9ff;
+    display: flow;
+    align-items: center;
+    justify-content: center;
+}*/
+
+.calculator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 84%;
+    background: #ffffff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 75px;
+}
+
+    .calculator form input {
+        border: 0;
+        outline: 0;
+        width: 70px;
+        height: 80px;
+        border-radius: 10px;
+        box-shadow: -8px -8px 15px rgba(255, 255, 255, 0.1),5px 5px 15px rgba(0, 0, 0, 0.2);
+        background: transparent;
+        font-size: 50px;
+        color: #000000;
+        cursor: pointer;
+        margin: 10px;
     }
+
+form .display {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px 0;
+}
+
+    form .display input {
+        text-align: right;
+        flex: 1;
+        font-size: 45px;
+        box-shadow: none;
+    }
+
+form input.equal {
+    width: 170px;
+}
+
+
+
+form input.operator {
+    color: #000000;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+    .calculator {
+        width: 100%;
+        height: 86%;
+        margin: 75px;
+        margin-left: 0;
+    }
+
+        .calculator form input {
+            width: 69px;
+            height: 65px;
+            font-size: 30px;
+        }
+
+    form .display input {
+        font-size: 60px;
+        margin-bottom: 270px;
+    }
+
+    form input.equal {
+        width: 163px;
+        background-color: #04AA6D;
+        color: white;
+    }
+
 }
