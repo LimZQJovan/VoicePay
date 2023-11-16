@@ -73,5 +73,29 @@ namespace VoicePay.Controllers
 		{
 			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 		}
-	}
+
+        public ActionResult Report()   
+        {
+            return View("Report");
+        }
+        public ActionResult Language()
+        {
+            return View("Language");
+        }
+
+        public ActionResult BankDetail()
+        {
+            return View("BankDetail");
+        }
+
+        public ActionResult NumberPad()
+        {
+            return View("NumberPad");
+        }
+
+        public ActionResult VoicePay()
+        {
+            return View("VoicePay");
+        }
+    }
 }
