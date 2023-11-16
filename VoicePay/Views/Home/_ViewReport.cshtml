@@ -1,0 +1,35 @@
+﻿@model List<VoicePay.Models.Transaction>
+
+<h2>Transactions details</h2>
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Payee Name</th>
+                    <th>Tel No</th>
+                    <th>Amount</th>
+                    <th>Reference No</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>@item.Payee</td>
+                    <td>@item.PayeeTelNo</td>
+                    <td>@item.Amount</td>
+                    <td>@item.ReferenceNo</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <span style="color:red">No transaction found!</span>
+}
