@@ -1,62 +1,74 @@
-﻿@*@model IEnumerable<web_s10247638.Models.Staff>
+﻿@model IEnumerable<web_assignment.Models.Parcel>
 
 @if (Model.ToList().Count > 0)
 {
-	<div class="table-responsive">
-		<table id="viewStaff" class="table table-striped table-bordered">
-			<thead class="table-dark">
-				<tr>
-					<th>ID</th>
-					<th>Name</th>
-					<th>Photo</th>
-					<th>Email Address</th>
-					<th>Employment Status</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach (var item in Model)
-				{
-					<tr>
-						<td>@item.StaffId.ToString()</td>
-						<td>@item.Name</td>
-						<td>
-							@{
-								string imageFileName = item.Name + ".jpg";
-							}
-							<img src="~/images/@imageFileName"
-								 style="height:50px" />
-						</td>
-						<td>@item.Email</td>
-						<td>
-							@{
-								string employmentStatus;
-								if (item.IsFullTime)
-								{
-									employmentStatus = "Full-Time";
-								}
-								else
-								{
-									employmentStatus = "Part-Time";
-								}
-							}
-							@employmentStatus
-						</td>
-						<td>
-							<a asp-action="Edit" asp-controller="Staff"
-							   asp-route-id="@item.StaffId">Edit</a> |
-							<a asp-action="Details" asp-controller="Staff"
-							   asp-route-id="@item.StaffId">Details</a> |
-							<a asp-action="Delete" asp-controller="Staff"
-							   asp-route-id="@item.StaffId">Delete</a>
-						</td>
-					</tr>
-				}
-			</tbody>
-		</table>
-	</div>
+    <div class="table-responsive">
+        <table id="viewParcel" class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Item escription</th>
+                    <th>RecieverName</th>
+                    <th>RecieverTelNo</th>
+                    <th>Delivery Address</th>
+                    <th>To City</th>
+                    <th>To Country</th>
+                    <th>Parcel Weight</th>
+                    <th>Delivery Status</th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ParcelID.ToString()</td>
+                        <td>@item.ItemDescription</td>
+                        <td>@item.ReceiverName</td>
+                        <td>@item.ReceiverTelNo</td>
+                        <td>@item.DeliveryAddress</td>
+                        <td>@item.ToCity</td>
+                        <td>@item.ToCountry</td>
+                        <td>@item.ParcelWeight</td>
+                        <td>
+                            @{
+                                string deliveryStatus = "";
+                                if (item.DeliveryStatus == '1')
+                                {
+                                    deliveryStatus = "Delivery to destination \tin progress";
+                                }
+                                else if (item.DeliveryStatus == '2')
+                                {
+                                    deliveryStatus = "Delivery to Airport \tin progress";
+
+                                }
+                                else if (item.DeliveryStatus == '3')
+                                {
+                                    deliveryStatus = "Delivery completed";
+                                }
+                                else if (item.DeliveryStatus == '4')
+                                {
+                                    deliveryStatus = "Delivery failed";
+                                }
+                                else if (item.DeliveryStatus == '0')
+                                {
+                                    deliveryStatus = "Pending assignment \t to delivery man";
+                                }
+                            }
+                            @deliveryStatus
+                        </td>
+                        <td>
+                            <a asp-action="Assign" asp-controller="StationManager"
+                       asp-route-id="@item.ParcelID">Assign</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
 else
 {
-	<span style="color:red">No record found!</span>
-}*@
+    <span style="color:red">No record found!</span>
+}
