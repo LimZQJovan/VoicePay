@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rickroll QR Code</title>
+	<style>
+		.image-container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-top: 20vh;
+			width: 80vh;
+			max-width: 90%;
+		}
+
+		img{
+			max-width: 100%;
+			object-fit: contain;
+		}
+	</style>
+</head>
+<body>
+    <div class="image-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Rickrolling_QR_code.png?20200615212723" alt="Rickroll QR Code">
+    </div>
+
+	<script>
+		// Wait for the page to load
+		document.addEventListener("DOMContentLoaded", function () {
+			// Set a timeout to redirect after 10 seconds
+			setTimeout(function () {
+				window.location.href = "/Home/Confirm"; // Replace with the path to the confirm view
+			}, 5000); // 10 seconds (10,000 milliseconds)
+		});
+	</script>
+</body>
+</html>

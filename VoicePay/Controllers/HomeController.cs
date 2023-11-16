@@ -90,5 +90,21 @@ namespace VoicePay.Controllers
         {
             return View("Report");
         }
+
+        public ActionResult QR()
+        {
+            // Retrieve the decimal amount from the query string parameter named "amount"
+            string amountStr = HttpContext.Request.Query["amount"];
+
+            HttpContext.Session.SetString("amount", amountStr);
+            return View("QR");
+        }
+
+        public ActionResult Confirm()
+        {
+            ViewData["amount"] = HttpContext.Session.GetString("amount");
+            return View("Confirm");
+        }
+
     }
 }

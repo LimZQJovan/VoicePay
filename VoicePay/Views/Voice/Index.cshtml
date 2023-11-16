@@ -6,6 +6,8 @@
     <title>Speech Recognition, Translation, and Decimal Conversion</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/css/VoicePay.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <label for="languageSelect">Select Language:</label>
@@ -17,25 +19,26 @@
         <!-- Add more language options as needed -->
     </select>
 
-    <button id="startButton">Start Recognition</button>
+    <div id="confirmation" style="display:none;">
+        <!-- Confirmation content -->
+        <p id="confirmation-content"></p>
+        <button onclick="confirmDecimal()">Confirm</button>
+    </div>
+
+    <div class="container">
+        <button class="circular-button" id="startButton">
+             <i class="fas fa-microphone" id="mic-icon"></i>
+        </button>
+    </div>
     <div id="decimalContainer"></div>
 
-    <div id="confirmation" style="display:none;">
-        <p id="confirmation-content"></p>
-        <button onclick="confirmDecimal()">Confirm</button>
-    </div>
 
-    <div id="confirmation" style="display:none;">
-        <p id="confirmation-content"></p>
-        <button onclick="confirmDecimal()">Confirm</button>
-    </div>
 
     <script>
         function showConfirmation(decimalAmount) {
             // Display a confirmation message on the page
-            const confirmationContent = `Is the decimal amount correct?\n\n${decimalAmount}`;
+            const confirmationContent = `Confirm?\n\n$${decimalAmount}`;
             document.getElementById('confirmation-content').innerHTML = confirmationContent;
-
             document.getElementById('confirmation').style.display = 'block';
         }
 

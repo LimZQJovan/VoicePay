@@ -53,9 +53,12 @@
 /* Styles for the container */
 .container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh; /* Full viewport height */
+    text-align: center;
+    margin-top: 20px; /* Adjust spacing from the top */
 }
 
 /* Styles for the circular button */
@@ -85,3 +88,20 @@
     /*.circular-button:hover {
         background-color: #04AA6D;
     }*/
+
+
+/* Styles for confirmation content */
+#confirmation {
+    text-align: center;
+    position: absolute;
+    top: 100px; /* Adjust position from top as needed */
+    left: 50%; /* Center confirmation horizontally */
+    transform: translateX(-50%);
+    background-color: #ffffff; /* Change this to your preferred background color */
+    padding: 20px;
+    z-index: 100;
+}
+
+.language-container {
+    text-align: center;
+}

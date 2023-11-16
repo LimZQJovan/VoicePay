@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Transaction Completed</title>
+    <style>
+        /* Some basic styling for the completion screen */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .completed-screen {
+            margin: 100px auto;
+            padding: 20px;
+            border: 2px solid #ccc;
+            max-width: 400px;
+        }
+
+        h1 {
+            color: #4682B4;
+        }
+
+        .amount {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="completed-screen">
+        <h1>Transaction Completed!</h1>
+        <p>Thank you for your purchase.</p>
+        <p class="amount">Amount paid: $<span id="paidAmount"></span></p>
+    </div>
+
+    <script>
+        // Accessing the amount from viewdata["amount"] and displaying it
+        var amountPaid = @ViewData["amount"]
+
+        // Display the amount paid in the HTML
+        document.getElementById('paidAmount').textContent = amountPaid.toFixed(2);
+    </script>
+</body>
+</html>
