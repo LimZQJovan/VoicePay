@@ -102,6 +102,69 @@
             .container .info span .fa {
                 color: #EF3B3A;
             }
+/* Dropdown button */
+.dropbtn {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    width: 100%; /* Adjust width for responsiveness */
+    text-align: center;
+    border-radius: 5px; /* Rounded corners */
+    margin-bottom: 10px; /* Spacing between button and dropdown content */
+}
+
+/* Hide the checkbox */
+.dropdown-toggle {
+    display: none;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 100%; /* Full width on smaller screens */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+/* Show the dropdown content on checkbox focus */
+.dropdown-toggle:checked + .dropdown-content {
+    display: block;
+}
+
+/* Style the links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+    /* Change color of links on hover */
+    .dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .dropdown {
+        position: relative;
+    }
+
+    .dropbtn {
+        width: 100%; /* Take full width */
+        border-radius: 0; /* Remove rounded corners */
+    }
+
+    .dropdown-content {
+        position: static;
+        width: 100%; /* Take full width */
+        box-shadow: none; /* Remove shadow */
+    }
+}
 
 
 body {

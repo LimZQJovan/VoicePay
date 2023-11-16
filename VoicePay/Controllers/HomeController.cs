@@ -44,28 +44,28 @@ namespace VoicePay.Controllers
                 return RedirectToAction("Index");
             }
         }
-        public ActionResult StallMain()
-        {
-            // Stop accessing the action if not logged in
-            // or account not in the "Staff" role
+		public ActionResult StallMain()
+		{
+			// Stop accessing the action if not logged in
+			// or account not in the "Staff" role
 
-            return View();
-        }
-        public ActionResult LogOut()
-        {
-            // Clear all key-values pairs stored in session state
-            // Call the Index action of Home controller
-            return RedirectToAction("Index");
-        }
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+			return View();
+		}
+		public ActionResult LogOut()
+		{
+			// Clear all key-values pairs stored in session state
+			// Call the Index action of Home controller
+			return RedirectToAction("Index");
+		}
+		public IActionResult Privacy()
+		{
+			return View();
+		}
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-    }
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+		public IActionResult Error()
+		{
+			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+		}
+	}
 }
