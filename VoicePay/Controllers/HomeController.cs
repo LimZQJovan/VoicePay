@@ -26,11 +26,17 @@ namespace VoicePay.Controllers
             string loginID = formData["txtLoginID"].ToString().ToLower();
             string password = formData["txtPassword"].ToString();
             string AccUEN = "";
+            string stallName = "";
+            string location = "";
+
             StaffDAL staffContext = new StaffDAL();
 
-            if (staffContext.Login(loginID, password, out AccUEN))
+            if (staffContext.Login(loginID, password, out AccUEN, out stallName, out location))
             {
                 HttpContext.Session.SetString("UEN", AccUEN);
+                HttpContext.Session.SetString("Name", stallName);
+                HttpContext.Session.SetString("Location", location);
+
                 // Store Login ID in session with the key "LoginID"
                 // Store user role "Staff" as a string in session with the key "Role"
                 // Redirect user to the "StaffMain" view through an action
