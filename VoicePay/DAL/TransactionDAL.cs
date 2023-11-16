@@ -1,26 +1,26 @@
-﻿    //using System.Data.SqlClient;
-    //using VoicePay.Models;
+﻿using System.Data.SqlClient;
+using VoicePay.Models;
 
-    //namespace VoicePay.DAL
-    //{
-    //    public class TransactionDAL
-    //    {
-    //        private IConfiguration Configuration { get; }
-    //        private SqlConnection conn;
-    //        //Constructor
-    //        public TransactionDAL()
-    //        {
-    //            //Read ConnectionString from appsettings.json file
-    //            var builder = new ConfigurationBuilder()
-    //            .SetBasePath(Directory.GetCurrentDirectory())
-    //            .AddJsonFile("appsettings.json");
-    //            Configuration = builder.Build();
-    //            string strConn = Configuration.GetConnectionString(
-    //            "PFDConnectionString");
-    //            //Instantiate a SqlConnection object with the
-    //            //Connection String read.
-    //            conn = new SqlConnection(strConn);
-    //        }
+namespace VoicePay.DAL
+{
+    public class TransactionDAL
+    {
+        private IConfiguration Configuration { get; }
+        private SqlConnection conn;
+        //Constructor
+        public TransactionDAL()
+        {
+            //Read ConnectionString from appsettings.json file
+            var builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json");
+            Configuration = builder.Build();
+            string strConn = Configuration.GetConnectionString(
+            "PFDConnectionString");
+            //Instantiate a SqlConnection object with the
+            //Connection String read.
+            conn = new SqlConnection(strConn);
+        }
 
         public List<Transaction> GetTransactions(string UEN, int dtYear, int dtMonth, int dtDay)
         {
@@ -95,4 +95,4 @@
             return transactionList;
         }
     }
-    }
+}

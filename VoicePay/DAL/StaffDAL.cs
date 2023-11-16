@@ -20,29 +20,43 @@ namespace VoicePay.DAL
             //Connection String read.
             conn = new SqlConnection(strConn);
         }
-        public bool Login(string loginId, string password)
+        public bool Login(string loginId, string password, out string UEN, out string location, out string Stallname)
         {
+            UEN = "";
+            Stallname = "";
+            location = "";
             bool authenticated = false;
-            //Create a SqlCommand object from connection object
+
+            // Create a SqlCommand object from connection object
             SqlCommand cmd = conn.CreateCommand();
-            //Specify the SELECT SQL statement
+
+            // Specify the SELECT SQL statement
             cmd.CommandText = @"SELECT * FROM Stall";
-            //Open a database connection
+
+            // Open a database connection
             conn.Open();
-            //Execute the SELECT SQL through a DataReader
+
+            // Execute the SELECT SQL through a DataReader
             SqlDataReader reader = cmd.ExecuteReader();
-            //Read all records until the end
+
+            // Read all records until the end
             while (reader.Read())
             {
-                // Convert email address to lowercase for comparison
-                // Password comparison is case-sensitive
-                if ((reader.GetString(2).ToLower() == loginId) &&
-                (reader.GetString(3) == password))
+                if ((reader.GetString(3).ToLower() == loginId) &&
+                  (reader.GetString(4) == password))
                 {
+                    UEN = reader.GetString(0);
+                    Stallname = reader.GetString(1);
+                    location = reader.GetString(2); // Corrected line
                     authenticated = true;
                     break; // Exit the while loop
                 }
             }
+
+            // Close the DataReader and the database connection
+            reader.Close();
+            conn.Close();
+
             return authenticated;
         }
     }

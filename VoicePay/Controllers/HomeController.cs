@@ -27,13 +27,13 @@ namespace VoicePay.Controllers
             // Email address converted to lowercase
             string loginID = formData["txtLoginID"].ToString().ToLower();
             string password = formData["txtPassword"].ToString();
-            //string UEN = "";
-            //string stallName = "";
-            //string location = "";
+            string UEN = "";
+            string stallName = "";
+            string location = "";
 
             StaffDAL staffContext = new StaffDAL();
 
-            if (staffContext.Login(loginID, password))
+            if (staffContext.Login(loginID, password, out UEN, out stallName, out location))
             {
                 HttpContext.Session.SetString("UEN", UEN);
                 HttpContext.Session.SetString("Name", stallName);
