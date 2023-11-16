@@ -56,7 +56,7 @@
             SqlCommand cmd = conn.CreateCommand();
 
             // Specify the SELECT SQL statement
-            cmd.CommandText = @"SELECT b.PayeeName, b.MobileNo, t.Amount, t.TransactionDateTime, t.ReferenceNo
+            cmd.CommandText = @"SELECT b.PayeeName, b.MobileNo, t.Amount, t.TransactionDateTime, t.ReferenceNumber
                FROM TransactionDetails t
                INNER JOIN Stall s
                ON s.UEN = t.ReceiverUEN
