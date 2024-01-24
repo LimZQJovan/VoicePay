@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Voice\**" />
+    <Content Remove="Views\Voice\**" />
+    <EmbeddedResource Remove="Views\Voice\**" />
+    <None Remove="Views\Voice\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\VoiceController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\css\CRImage.jpg" />
   </ItemGroup>
 

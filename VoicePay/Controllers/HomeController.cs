@@ -5,10 +5,13 @@ using VoicePay.Models;
 
 namespace VoicePay.Controllers
 {
+    
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
+        private readonly ILogger<HomeController> _logger;
+        TransactionDAL transactionContext = new TransactionDAL();
+        StaffDAL staffContext = new StaffDAL();
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -25,17 +28,17 @@ namespace VoicePay.Controllers
             // Email address converted to lowercase
             string loginID = formData["txtLoginID"].ToString().ToLower();
             string password = formData["txtPassword"].ToString();
-            //string UEN = "";
-            //string stallName = "";
-            //string location = "";
+            string UEN = "";
+            string stallName = "";
+            string location = "";
 
             StaffDAL staffContext = new StaffDAL();
 
-            if (staffContext.Login(loginID, password))
+            if (staffContext.Login(loginID, password, out UEN, out stallName, out location))
             {
-
-                // Store Login ID in session with the key "LoginID"
-                // Store user role "Staff" as a string in session with the key "Role"
+                HttpContext.Session.SetString("UEN", UEN);
+                HttpContext.Session.SetString("Name", stallName);
+                HttpContext.Session.SetString("Location", location);
                 // Redirect user to the "StaffMain" view through an action
                 return RedirectToAction("StallMain");
             }
@@ -86,9 +89,33 @@ namespace VoicePay.Controllers
 			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 		}
 
-        public ActionResult Report()   
+        public ActionResult Report(string UEN, int selectedYear, int selectedMonth, int selectedDay)
         {
-            return View("Report");
+            int dtYear = selectedYear == -1 ? DateTime.Now.Year : selectedYear;
+            int dtMonth = selectedMonth;
+            int dtDay = selectedDay;
+            UEN = HttpContext.Session.GetString("UEN");
+            List<Transaction> transactionList = transactionContext.GetTransactions(UEN, dtYear, dtMonth, dtDay);
+            return View(transactionList);
         }
+
+        public ActionResult QR()
+        {
+            // Retrieve the decimal amount from the query string parameter named "amount"
+            string amountStr = HttpContext.Request.Query["amount"];
+
+            HttpContext.Session.SetString("amount", amountStr);
+            return View("QR");
+        }
+
+        public ActionResult Confirm()
+        {
+            float amount = float.TryParse(HttpContext.Session.GetString("amount"), out float parsedAmount) ? parsedAmount : 0.0f;
+            transactionContext.AddTransaction(HttpContext.Session.GetString("UEN"), "5501234567", amount, DateTime.Now, "BNKREF6543210987");
+            ViewData["amount"] = HttpContext.Session.GetString("amount");
+            return View("Confirm");
+        }
+
+
     }
 }

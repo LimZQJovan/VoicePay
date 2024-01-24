@@ -36,13 +36,25 @@
                 <div>
                     <input type="button" value="0.5" onclick="display.value += '.5' ">
                     <input type="button" value="0" onclick="display.value += '0' ">
-                    <input type="button" value="Done" onclick="display.value = eval(display.value)" class="equal operator">
+                    <input type="button" value="Done" onclick="calculateAndRedirect()" class=" equal operator">
 
                 </div>
             </form>
         </div>
     </div>
 
+    <script>
+        function calculateAndRedirect() {
+            // Get the input value
+            const displayValue = document.querySelector('input[name="display"]').value;
+
+            // Calculate the expression (evaluates the string)
+            const result = eval(displayValue);
+
+            // Redirect to another MVC view page with the calculated amount as a query string parameter
+            window.location.href = `/Home/QR?amount=${encodeURIComponent(result)}`;
+        }
+    </script>
 
 </body>
 </html>

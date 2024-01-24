@@ -1,35 +1,71 @@
-﻿@model List<VoicePay.Models.Transaction>
-
-<h2>Transactions details</h2>
-
-@if (Model != null && Model.Count > 0)
+﻿@if (Model.Count > 0)
 {
-    <div class="table-responsive">
+    <head>
+       <style >
+            .table-responsive table {
+                width: 100%;
+                min-width: 800px;
+                border-collapse: collapse; /* Optional: Remove border-spacing between cells */
+            }
+            .container {
+                position: relative;
+                z-index: 1;
+                max-width: 1200px;
+                margin: auto;
+                overflow-x: auto;
+            }
+
+            .table-responsive th, .table-responsive td {
+                padding: 8px;
+                border: 1px solid #ddd; /* Add borders to cells */
+                text-align: left;
+            }
+
+            .table-responsive th {
+                background-color: #f2f2f2; /* Background color for header cells */
+            }
+            .table-responsive {
+                display: block;
+            }
+        </style>
+    </head>
+    <div class="custom-table-responsive">
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th>Payee Name</th>
                     <th>Tel No</th>
                     <th>Amount</th>
+                    <th>Transaction Date</th>
                     <th>Reference No</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
+                @{
+                    decimal total = 0;
+                }
                 @foreach (var item in Model)
                 {
-                <tr>
-                    <td>@item.Payee</td>
-                    <td>@item.PayeeTelNo</td>
-                    <td>@item.Amount</td>
-                    <td>@item.ReferenceNo</td>
-                </tr>
+                    <tr>
+                        <td>@item.PayeeName</td>
+                        <td>@item.MobileNo</td>
+                        <td>@item.Amount.ToString("0.00")</td>
+                        <td>@item.TransactionDateTime</td>
+                        <td>@item.ReferenceNo</td>
+                    </tr>
+                    total += item.Amount;
                 }
+                <tr>
+                    <td colspan="2"><b>Total Revenue:</b></td>
+                    <td><b>@total.ToString("0.00")</b></td>
+                    <td colspan="3"></td>
+                </tr>
             </tbody>
         </table>
     </div>
 }
 else
 {
-    <span style="color:red">No transaction found!</span>
+    <span style="color:red">No transactions found!</span>
 }
