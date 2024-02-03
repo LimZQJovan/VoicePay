@@ -83,7 +83,14 @@
 
             displayInput.value = currentDisplay + value;
 
-            updateResult();
+            if (displayInput.value.includes('x')) {
+                const replacedInput = displayInput.value.replace('x', '*');
+                updateResult(replacedInput);
+            } 
+            else
+            {
+                updateResult(displayInput.value);
+            }
         }
 
         function backspace() {
@@ -92,11 +99,11 @@
 
             displayInput.value = currentDisplay.slice(0, -1);
 
-            updateResult();
+            updateResult(displayInput.value);
         }
 
-        function updateResult() {
-            const displayValue = document.querySelector('input[name="display"]').value;
+        function updateResult(input) {
+            const displayValue = input;
 
             try {
                 const result = Function('"use strict";return (' + displayValue + ')')();
