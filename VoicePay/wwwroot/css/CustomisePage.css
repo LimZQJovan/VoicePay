@@ -1,0 +1,19 @@
+html {
+    color-scheme: light;
+}
+
+body {
+    margin: 2rem;
+    min-height: 50vh;
+    display: grid;
+    place-content: center;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: system-ui;
+}
+
+.inputs {
+    display: grid;
+    gap: 2rem;
+}

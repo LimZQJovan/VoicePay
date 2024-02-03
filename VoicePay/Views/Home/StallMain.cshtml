@@ -1,26 +1,78 @@
-﻿@{
-	ViewData["Title"] = "Staff Main Page";
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
+
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/StallMain.css" />
 </head>
+
 <body>
-    <div class="card">
-        <img src="/css/CRImage.jpg" alt="CR" style="width:100%"/> 
-        <h1>Chicken Rice</h1>
-        <p class="title">CLEMENTI HAWKER CENTER</p>
-        <p>448 Clementi Ave 3, Singapore 120448</p>
-        <div style="margin: 24px 0;">
-            <a href="#"><i class="fa fa-dribbble"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-facebook"></i></a>
+        <div class="card">
+            <img src="/css/CRImage.jpg" alt="CR" style="width:100%" />
+            <h1>Chicken Rice</h1>
+            <p class="title">CLEMENTI HAWKER CENTER</p>
+            <p>448 Clementi Ave 3, Singapore 120448</p>
+            <div style="margin: 24px 0;">
+                <a href="#"><i class="fa fa-dribbble"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+            </div>
+        </div>
+</body>
+
+</html>
+
+@* <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/FontSizeChangeTest.css">
+    <title>Font Size Change</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="buttons">
+            <button type="button" class="button active" onclick="fontchange(18)">A</button>
+            <button type="button" class="button" onclick="fontchange(23)">A</button>
+            <button type="button" class="button" onclick="fontchange(27)">A</button>
+        </div>
+        <div class="text">
+            <img src="/css/CRImage.jpg" alt="CR" style="width:100%" />
+            <h1>Chicken Rice</h1>
+            <p class="title">CLEMENTI HAWKER CENTER</p>
+            <p>448 Clementi Ave 3, Singapore 120448</p>
+            <div style="margin: 24px 0;">
+                <a href="#"><i class="fa fa-dribbble"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+            </div>
         </div>
     </div>
 
-</body>
+    <script>
+
+        function fontchange(n) {
+            var paragraph = document.getElementById('para');
+            paragraph.style.fontSize = n + "px";
+        }
+
+        var buttons = document.querySelector(".buttons");
+        var button = buttons.querySelectorAll(".button");
+
+        for (var i = 0; i < button.length; i++) {
+            button[i].addEventListener('click', function () {
+                var current = document.getElementsByClassName('active');
+                current[0].className = current[0].className.replace("active", "");
+                this.className += " active"
+            })
+        }
+    </script> *@
+
+@* </body>
 </html>
+ *@
