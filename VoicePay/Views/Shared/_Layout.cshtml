@@ -28,15 +28,13 @@
     </ul> *@
     <div class="topnav">
         <a class="active" href="/Home/StallMain">Hawk'Ah</a>
+        <div id="google_translate_element"></div>
+        <button class="increaseBtn" onclick="changeFontSize(1.1)">A+</button>
+        <button class="decreaseBtn" onclick="changeFontSize(0.99)">A-</button>
         <div class="topnav-right">
-            <div class="button-container">
-                <div id="google_translate_element"></div>
-                <button class="increaseBtn" onclick="changeFontSize(1.1)">A+</button>
-                <button class="decreaseBtn" onclick="changeFontSize(0.99)">A-</button>
-                <a href="~/Home/LogOut">
-                    <i class="fa fa-sign-out" aria-hidden="true"></i>
-                </a>
-            </div>
+            <a href="~/Home/LogOut">
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+            </a>
         </div>
     </div>
 
@@ -67,15 +65,14 @@
                 </a>
             </li>
         </ul> *@
-
-    <nav class="nav" id="myNavbar">
-          <a href="#" class="nav__link" id="logoutLink">
+    <nav class="nav">
+        @*        <a href="#" class="nav__link" id="logoutLink">
         <i class="material-icons nav__icon">summarize</i>
         <span class="nav__text">Report</span>
-        </a>
-        <a href="/Home/Report" class="nav__link">
+        </a>*@
+        <a href="/Home/Admin" class="nav__link">
             <i class="material-icons nav__icon">summarize</i>
-            <span class="nav__text">Report</span>
+            <span class="nav__text">Admin</span>
         </a>
         <a href="/Home/NumberPad" class="nav__link">
             <i class="material-icons nav__icon">dialpad</i>

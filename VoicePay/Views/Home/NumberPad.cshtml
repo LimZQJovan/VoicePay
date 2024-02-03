@@ -2,20 +2,20 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator using javascript - Easy Tutorials</title>
+    <title>Calculator using JavaScript - Easy Tutorials</title>
     <link rel="stylesheet" href="~/css/NumberPad.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
-<body>
+    <body>
 
     <div class="container">
         <div class="calculator">
             <form>
                 <div class="display">
-                    <input type="text" name="display" readonly>
+                    <input type="text" name="display" style="margin-right: 100px;" readonly>
                 </div>
                 <div class="display-result">
-                    <input type="text" name="display-result" value=0 readonly>
+                    <input type="text" name="display-result" style="width: 70%;" value=0 readonly>
                 </div>
                 <div>
                     <input type="button" value="1" onclick="appendValue('1')">
@@ -52,32 +52,64 @@
     </div>
 
     <script>
-        function appendValue(value) {
-            const displayValue = document.querySelector('input[name="display"]').value += value;
-            if (displayValue.includes('x')) {
+        // function appendValue(value) {
+        //     const displayValue = document.querySelector('input[name="display"]').value += value;
+        //     if (displayValue.includes('x')) {
+        //         const replacedValue = displayValue.replace('x', '*');
+        //         const result = eval(replacedValue);
+        //         document.querySelector('input[name="display-result"]').value = result;
+        //     } else {
+        //         const result = eval(displayValue);
+        //         document.querySelector('input[name="display-result"]').value = result;
+        //     }
+        // }
 
-                const replacedValue = displayValue.replace('x','*');
-                const result = eval(replacedValue);
-                document.querySelector('input[name="display-result"]').value = result;
-            }
-            else
-            {
-                const result = eval(displayValue);
-                document.querySelector('input[name="display-result"]').value = result;
-            }
+        // function backspace() {
+        //     var currentDisplay = document.querySelector('input[name="display"]').value;
+        //     document.querySelector('input[name="display"]').value = currentDisplay.slice(0, -1);
+        //     const result = eval(document.querySelector('input[name="display"]').value);
+        //     document.querySelector('input[name="display-result"]').value = result || 0;
+        // }
+
+        // function calculateAndRedirect() {
+        //     const result = eval(document.querySelector('input[name="display"]').value);
+        //     // Redirect to another MVC view page with the calculated amount as a query string parameter
+        //     window.location.href = /Home/QR ? amount = ${ encodeURIComponent(result) };
+        // }
+
+        function appendValue(value) {
+            const displayInput = document.querySelector('input[name="display"]');
+            const currentDisplay = displayInput.value;
+
+            displayInput.value = currentDisplay + value;
+
+            updateResult();
         }
 
         function backspace() {
-            var currentDisplay = document.querySelector('input[name="display"]').value;
-            document.querySelector('input[name="display"]').value = currentDisplay.slice(0, -1);
-            const result = eval(document.querySelector('input[name="display"]').value);
-            document.querySelector('input[name="display-result"]').value = result || 0;
+            const displayInput = document.querySelector('input[name="display"]');
+            const currentDisplay = displayInput.value;
 
+            displayInput.value = currentDisplay.slice(0, -1);
+
+            updateResult();
+        }
+
+        function updateResult() {
+            const displayValue = document.querySelector('input[name="display"]').value;
+
+            try {
+                const result = Function('"use strict";return (' + displayValue + ')')();
+                document.querySelector('input[name="display-result"]').value = result;
+            } catch (error) {
+                // Handle any potential errors
+                document.querySelector('input[name="display-result"]').value = "Error";
+            }
         }
 
         function calculateAndRedirect() {
-            const displayValue = document.querySelector('input[name="display-result"]').value;
-            const result = eval(displayValue);
+            const result = document.querySelector('input[name="display-result"]').value;
+            // Redirect to another MVC view page with the calculated amount as a query string parameter
             window.location.href = `/Home/QR?amount=${encodeURIComponent(result)}`;
         }
 
@@ -108,5 +140,5 @@
         });
     </script>
 
-</body>
+    </body>
 </html>

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<VoicePay.Models.Inventory>
+
+@if (Model.ToList().Count > 0)
+{
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="~/css/_ViewInventory.css">
+    </head>
+
+    <div class="table-responsive">
+        <table id="viewStaff" class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Supplier Name</th>
+                    <th>Supplier Contact</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.InventoryID.ToString()</td>
+                        <td>@item.ItemName</td>
+                        <td>@item.Quantity.ToString()</td>
+                        <td>@item.SupplierName</td>
+                        <td>@item.SupplierContactNo</td>
+                        <td>
+                            <!-- Add a link to edit the inventory item -->
+                            <a asp-controller="Home" asp-action="EditInventory" asp-route-id="@item.InventoryID">Edit</a> |
+                            |
+                            <!-- Add a link to delete the inventory item -->
+                            <a asp-action="DeleteInventory" asp-controller="Home"
+                       asp-route-id="@item.InventoryID">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <span style="color:red">No record found!</span>
+}
