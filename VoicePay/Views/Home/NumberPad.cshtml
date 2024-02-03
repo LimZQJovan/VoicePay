@@ -43,8 +43,8 @@
                 </div>
                 <div>
                     <div>
-                        <input type="button" value="TakeAway" onclick="appendValue('0.3')" style="width: 65%; color: white; background-color: cadetblue;" class="TA">
-                        <input type="button" value="Edit" onclick="window.location.href='NumberPadCustomise.cshtml'" style="width: 40%; color: white; background-color: cadetblue;" class="CUST">
+                        <input type="button" id="custombutton" style="width: 65%; color: white; background-color: cadetblue;" class="TA">
+                        <input type="button" value="Edit" onclick="window.location.href='NumberPadCustomise'" style="width: 40%; color: white; background-color: cadetblue;" class="CUST">
                     </div>
                 </div>
             </form>
@@ -80,6 +80,32 @@
             const result = eval(displayValue);
             window.location.href = `/Home/QR?amount=${encodeURIComponent(result)}`;
         }
+
+        // Function to retrieve edited values from localStorage
+        function retrieveEditedValues() {
+            const editedValue = localStorage.getItem('currentValue');
+            const editedText = localStorage.getItem('currentText');
+            return { editedValue, editedText };
+        }
+
+        function editButton(newValue, newText) {
+            const custombutton = document.getElementById('custombutton');
+            custombutton.value = newText;
+            custombutton.setAttribute('onclick', `appendValue('${newValue}')`);
+        }
+        // Check for edited values when the main page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            const { editedValue, editedText } = retrieveEditedValues();
+
+            // Check if there are edited values and apply them
+            if (editedValue !== null && editedText !== null) {
+                editButton(editedValue, editedText);
+
+                // Clear the edited values from localStorage
+                localStorage.removeItem('editedValue');
+                localStorage.removeItem('editedText');
+            }
+        });
     </script>
 
 </body>
