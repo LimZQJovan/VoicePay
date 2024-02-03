@@ -22,17 +22,22 @@
 </head>
 <body>
     <div class="image-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Rickrolling_QR_code.png?20200615212723" alt="Rickroll QR Code">
+		<img src="@Url.Content("~/images/qrcode.png")" alt="QR Code" alt="Rickroll QR Code">
     </div>
 
 	<script>
-		// Wait for the page to load
-		document.addEventListener("DOMContentLoaded", function () {
-			// Set a timeout to redirect after 10 seconds
-			setTimeout(function () {
-				window.location.href = "/Home/Confirm"; // Replace with the path to the confirm view
-			}, 5000); // 10 seconds (10,000 milliseconds)
-		});
+		// Check if the URL has a success parameter indicating a successful payment
+		const urlParams = new URLSearchParams(window.location.search);
+		const paymentSuccess = urlParams.get('success');
+
+		if (paymentSuccess === 'true') {
+			// Perform any additional logic for successful payments
+
+			// Redirect to the desired confirmation page on your website
+			window.location.href = '/Home/Confirm';
+		} else {
+			// Handle other cases or display an error message
+		}
 	</script>
 </body>
 </html>
