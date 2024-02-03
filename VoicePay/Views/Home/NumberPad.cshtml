@@ -56,11 +56,12 @@
             const displayValue = document.querySelector('input[name="display"]').value += value;
             if (displayValue.includes('x')) {
 
-                const replacedValue = displayValue.replace('x', '*');
+                const replacedValue = displayValue.replace('x','*');
                 const result = eval(replacedValue);
                 document.querySelector('input[name="display-result"]').value = result;
             }
-            else {
+            else
+            {
                 const result = eval(displayValue);
                 document.querySelector('input[name="display-result"]').value = result;
             }
@@ -74,10 +75,8 @@
 
         }
 
-        function calculateAndRedirect() {
-            const displayValue = document.querySelector('input[name="display-result"]').value;
-            const result = eval(displayValue);
-            window.location.href = /Home/QR ? amount = ${ encodeURIComponent(result) };
+            // Redirect to another MVC view page with the calculated amount as a query string parameter
+            window.location.href = `/Home/QR?amount=${encodeURIComponent(result)}`;
         }
     </script>
 

@@ -30,6 +30,7 @@
         <a class="active" href="/Home/StallMain">Hawk'Ah</a>
         <div class="topnav-right">
             <div class="button-container">
+                <div id="google_translate_element"></div>
                 <button class="increaseBtn" onclick="changeFontSize(1.1)">A+</button>
                 <button class="decreaseBtn" onclick="changeFontSize(0.99)">A-</button>
                 <a href="~/Home/LogOut">
@@ -66,8 +67,11 @@
                 </a>
             </li>
         </ul> *@
-
-    <nav class="nav" id="myNavbar">
+    <nav class="nav">
+        @*        <a href="#" class="nav__link" id="logoutLink">
+        <i class="material-icons nav__icon">summarize</i>
+        <span class="nav__text">Report</span>
+        </a>*@
         <a href="/Home/Report" class="nav__link">
             <i class="material-icons nav__icon">summarize</i>
             <span class="nav__text">Report</span>
@@ -117,6 +121,16 @@
     window.location.href = 'Logout';
     });
     </script>*@
+    <script src="script.js"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                { pageLanguage: 'en' },
+                'google_translate_element'
+            );
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
