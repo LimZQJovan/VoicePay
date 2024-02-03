@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator using javascript - Easy Tutorials</title>
+    <link rel="stylesheet" href="~/css/NumberPad.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+
+    <div class="container">
+        <div class="calculator">
+            <form>
+                <div class="display">
+                    <input type="text" name="display">
+                </div>
+                <div>
+                    <input type="button" value="1" onclick="display.value += '1' ">
+                    <input type="button" value="2" onclick="display.value += '2' ">
+                    <input type="button" value="3" onclick="display.value += '3' ">
+                    <input type="button" value="backspace" onclick="display.value =  display.value.toString().slice(0,-1)" class="material-symbols-outlined">
+
+                </div>
+                <div>
+                    <input type="button" value="4" onclick="display.value += '4' ">
+                    <input type="button" value="5" onclick="display.value += '5' ">
+                    <input type="button" value="6" onclick="display.value += '6' ">
+                    <input type="button" value="." onclick="display.value += '.' " class="operator">
+                </div>
+                <div>
+                    <input type="button" value="7" onclick="display.value += '7' ">
+                    <input type="button" value="8" onclick="display.value += '8' ">
+                    <input type="button" value="9" onclick="display.value += '9' ">
+                    <input type="button" value="+" onclick="display.value += '+' " class="operator">
+                </div>
+                <div>
+                    <input type="button" value="0.5" onclick="display.value += '.5' ">
+                    <input type="button" value="0" onclick="display.value += '0' ">
+                    <input type="button" value="Done" onclick="calculateAndRedirect()" class="equal operator">
+                </div>
+                <div>
+                    <input type="button" value="Take Away" onclick="display.value += '0.3'" style="width: 100%; color: white; background-color: cadetblue;" class="TA">
+                </div>
+                <div>
+                    <input type="button" value="Plastic Container" onclick="display.value += '0.2'" style="width: 100%; color: white; background-color: cadetblue;" class="PC">
+                </div>
+                <div>
+                    <input type="button" value="Customise" onclick="window.location.href='NumberPadCustomise.cshtml'" class="customise" style="width: 100%; color: white; background-color: black;">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function calculateAndRedirect() {
+            // Get the input value
+            const displayValue = document.querySelector('input[name="display"]').value;
+
+            // Calculate the expression (evaluates the string)
+            const result = eval(displayValue);
+
+            // Redirect to another MVC view page with the calculated amount as a query string parameter
+            window.location.href = `/Home/QR?amount=${encodeURIComponent(result)}`;
+        }
+    </script>
+
+</body>
+</html>

@@ -12,47 +12,72 @@
         <div class="calculator">
             <form>
                 <div class="display">
-                    <input type="text" name="display">
+                    <input type="text" name="display" readonly>
+                </div>
+                <div class="display-result">
+                    <input type="text" name="display-result" value=0 readonly>
                 </div>
                 <div>
-                    <input type="button" value="1" onclick="display.value += '1' ">
-                    <input type="button" value="2" onclick="display.value += '2' ">
-                    <input type="button" value="3" onclick="display.value += '3' ">
-                    <input type="button" value="backspace" onclick="display.value =  display.value.toString().slice(0,-1)" class="material-symbols-outlined">
-                    
-                </div>
-                <div>
-                    <input type="button" value="4" onclick="display.value += '4' ">
-                    <input type="button" value="5" onclick="display.value += '5' ">
-                    <input type="button" value="6" onclick="display.value += '6' ">
-                    <input type="button" value="." onclick="display.value += '.' " class="operator">
-                </div>
-                <div>
-                    <input type="button" value="7" onclick="display.value += '7' ">
-                    <input type="button" value="8" onclick="display.value += '8' ">
-                    <input type="button" value="9" onclick="display.value += '9' ">
-                    <input type="button" value="+" onclick="display.value += '+' " class="operator">
-                </div>
-                <div>
-                    <input type="button" value="0.5" onclick="display.value += '.5' ">
-                    <input type="button" value="0" onclick="display.value += '0' ">
-                    <input type="button" value="Done" onclick="calculateAndRedirect()" class=" equal operator">
+                    <input type="button" value="1" onclick="appendValue('1')">
+                    <input type="button" value="2" onclick="appendValue('2')">
+                    <input type="button" value="3" onclick="appendValue('3')">
+                    <input type="button" value="backspace" onclick="backspace()" class="material-symbols-outlined">
 
+                </div>
+                <div>
+                    <input type="button" value="4" onclick="appendValue('4')">
+                    <input type="button" value="5" onclick="appendValue('5')">
+                    <input type="button" value="6" onclick="appendValue('6')">
+                    <input type="button" value="x" onclick="appendValue('x')" class="operator">
+                </div>
+                <div>
+                    <input type="button" value="7" onclick="appendValue('7')">
+                    <input type="button" value="8" onclick="appendValue('8')">
+                    <input type="button" value="9" onclick="appendValue('9')">
+                    <input type="button" value="+" onclick="appendValue('+')" class="operator">
+                </div>
+                <div>
+                    <input type="button" value="." onclick="appendValue('.')">
+                    <input type="button" value="0" onclick="appendValue('0')">
+                    <input type="button" value="Done" onclick="calculateAndRedirect()" class="equal operator">
+                </div>
+                <div>
+                    <div>
+                        <input type="button" value="TakeAway" onclick="appendValue('0.3')" style="width: 65%; color: white; background-color: cadetblue;" class="TA">
+                        <input type="button" value="Edit" onclick="window.location.href='NumberPadCustomise.cshtml'" style="width: 40%; color: white; background-color: cadetblue;" class="CUST">
+                    </div>
                 </div>
             </form>
         </div>
     </div>
 
     <script>
+        function appendValue(value) {
+            const displayValue = document.querySelector('input[name="display"]').value += value;
+            if (displayValue.includes('x')) {
+
+                const replacedValue = displayValue.replace('x', '*');
+                const result = eval(replacedValue);
+                document.querySelector('input[name="display-result"]').value = result;
+            }
+            else {
+                const result = eval(displayValue);
+                document.querySelector('input[name="display-result"]').value = result;
+            }
+        }
+
+        function backspace() {
+            var currentDisplay = document.querySelector('input[name="display"]').value;
+            document.querySelector('input[name="display"]').value = currentDisplay.slice(0, -1);
+            const result = eval(document.querySelector('input[name="display"]').value);
+            document.querySelector('input[name="display-result"]').value = result || 0;
+
+        }
+
         function calculateAndRedirect() {
-            // Get the input value
-            const displayValue = document.querySelector('input[name="display"]').value;
-
-            // Calculate the expression (evaluates the string)
+            const displayValue = document.querySelector('input[name="display-result"]').value;
             const result = eval(displayValue);
-
-            // Redirect to another MVC view page with the calculated amount as a query string parameter
-            window.location.href = `/Home/QR?amount=${encodeURIComponent(result)}`;
+            window.location.href = /Home/QR ? amount = ${ encodeURIComponent(result) };
         }
     </script>
 

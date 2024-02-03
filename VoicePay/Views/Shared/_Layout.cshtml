@@ -3,10 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] VoicePay</title>
+    <title>@ViewData["Title"] Hawk'Ah</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/VoicePay.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <header>
@@ -14,8 +15,8 @@
     </header>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- A grey navbar that expands horizontally at medium device -->
-    <ul>
-        <li><a class="active" href="/Home/StallMain" style="font-size: 30px">HawkPAY</a></li>
+    @* <ul>
+        <li><a class="active" href="/Home/StallMain" style="font-size: 30px">Hawk'Ah</a></li>
         <li class="nav-item">
             <!-- A link for logging out user -->
             <a class="nav-link" href="~/Home/LogOut">
@@ -23,7 +24,33 @@
                 <span class="nav__text"></span>
             </a>
         </li>
-    </ul>
+
+    </ul> *@
+    <div class="topnav">
+        <a class="active" href="/Home/StallMain">Hawk'Ah</a>
+        <div class="topnav-right">
+            <div class="button-container">
+                <button class="increaseBtn" onclick="changeFontSize(1.1)">A+</button>
+                <button class="decreaseBtn" onclick="changeFontSize(0.99)">A-</button>
+                <a href="~/Home/LogOut">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+        <script>
+            function changeFontSize(newSize) {
+                var allTextElements = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, span, div, a, li, td, th');
+
+                allTextElements.forEach(function (element) {
+                    var currentSize = parseFloat(window.getComputedStyle(element, null).getPropertyValue('font-size'));
+                    var newSizeValue = currentSize * newSize;
+                    element.style.fontSize = newSizeValue + "px";
+                });
+            }
+        </script>
+
         <!-- Toggle/collapsible Button, also known as hamburger button -->
         <!-- Links in the navbar, displayed as drop-down list when collapsed -->
         <!-- Links that are aligned to the left,
@@ -39,11 +66,8 @@
                 </a>
             </li>
         </ul> *@
-    <nav class="nav">
-        @*        <a href="#" class="nav__link" id="logoutLink">
-        <i class="material-icons nav__icon">summarize</i>
-        <span class="nav__text">Report</span>
-        </a>*@
+
+    <nav class="nav" id="myNavbar">
         <a href="/Home/Report" class="nav__link">
             <i class="material-icons nav__icon">summarize</i>
             <span class="nav__text">Report</span>
@@ -64,13 +88,26 @@
             <i class="material-icons nav__icon">language</i>
             <span class="nav__text">Language</span>
         </a>
+        @* <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a> *@
     </nav>
+    
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
 
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    @* <script>
+        function myFunction() {
+            var x = document.getElementById("myNavbar");
+            if (x.className === "nav") {
+                x.className += " responsive";
+            } else {
+                x.className = "nav";
+            }
+        }
+    </script> *@
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
