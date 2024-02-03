@@ -68,6 +68,11 @@ namespace VoicePay.Controllers
             return View("NumberPad");
         }
 
+        public ActionResult NumberPadCustomise()
+        {
+            return View("NumberPadCustomise");
+        }
+
         public ActionResult VoicePay()
         {
             return View("VoicePay");

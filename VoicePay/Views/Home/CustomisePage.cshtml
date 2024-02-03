@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- Use Unicode character encoding - multi-language compatibility -->
+    <meta charset="utf-8">
+
+    <!-- Set the initial view zooming scale for mobile device -->
+    <meta name="viewport" content="width = device-width,
+ initial-scale = 1" />
+    <link rel="stylesheet" type="text/css" href="~/css/CustomisePage.css">
+</head>
+<body>
+    <h2>Customise</h2>
+    <div class="inputs">
+        <div>
+            <p>type="text"</p>
+            <input type="text">
+        </div>
+
+        <div>
+            <p>type="number"</p>
+            <input type="number">
+        </div>
+
+        <div>
+            <p>type="number" inputmode="numeric"</p>
+            <input type="number" inputmode="numeric">
+        </div>
+
+        <div>
+            <p>type="text" inputmode="numeric"</p>
+            <input type="text" inputmode="numeric">
+        </div>
+    </div>
+
+    <script>
+        const numericInputs = document.querySelectorAll("[inputmode='numeric']");
+
+        numericInputs.forEach((input) => {
+            validateInput(input);
+        });
+
+        function validateInput(el) {
+            el.addEventListener("beforeinput", function (e) {
+                let beforeValue = el.value;
+                e.target.addEventListener(
+                    "input",
+                    function () {
+                        if (el.validity.patternMismatch) {
+                            el.value = beforeValue;
+                        }
+                    },
+                    { once: true }
+                );
+            });
+        }
+    </script>
+    ﻿
+  
+</body>
+</html>
