@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics;
 using VoicePay.DAL;
 using VoicePay.Models;
@@ -117,6 +118,53 @@ namespace VoicePay.Controllers
             List<Transaction> transactionList = transactionContext.GetTransactions(UEN, dtYear, dtMonth, dtDay);
             return View(transactionList);
         }
+
+        // GET: Staff/Create
+        public ActionResult CreateInventory()
+        {
+            return View();
+        }
+
+        // POST: Staff/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateInventory(Inventory inventory)
+        {
+            try
+            {
+                string accId = HttpContext.Session.GetString("AccId");
+                int nextInventoryID = inventoryContext.CountItems(accId) + 1;
+                inventory.InventoryID = nextInventoryID;
+                inventory.AccId = accId;
+
+                // Log Inventory data for debugging
+                Console.WriteLine($"InventoryID: {inventory.InventoryID}, ItemName: {inventory.ItemName}, Quantity: {inventory.Quantity}, SupplierName: {inventory.SupplierName}, SupplierContactNo: {inventory.SupplierContactNo}, AccId: {inventory.AccId}");
+
+                if (ModelState.IsValid)
+                {
+                    inventoryContext.Add(inventory);
+                    // Redirect user to Staff/Index view
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    // Input validation fails, return to the Create view
+                    // to display error message
+                    return View(inventory);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception for debugging
+                Console.WriteLine($"Exception: {ex.Message}");
+
+                // Handle the exception as needed
+                ModelState.AddModelError(string.Empty, "An error occurred while processing the form.");
+                return View(inventory);
+            }
+        }
+
+
         public ActionResult Inventory()
         {
             string accId = HttpContext.Session.GetString("AccId");
@@ -127,11 +175,17 @@ namespace VoicePay.Controllers
         public ActionResult EditInventory(int? id)
         {
             string accId = HttpContext.Session.GetString("AccId");
-            if (id == null)
+
+            // Check if id is null or negative
+            if (!id.HasValue || id <= 0)
             {
                 return RedirectToAction("Inventory");
             }
+
             Inventory inventory = inventoryContext.GetInventoryItem(id.Value, accId);
+            inventory.InventoryID = id.Value;
+
+            // Check if inventory is not found
             if (inventory == null)
             {
                 // Return to the listing page, not allowed to edit
@@ -144,11 +198,11 @@ namespace VoicePay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditInventory(Inventory inventory)
         {
-
-            //Update staff record to database
+            // Update staff record to the database
             inventoryContext.Update(inventory);
             return RedirectToAction("Inventory");
         }
+
 
         private const string StripeSecretKey = "sk_test_51OfEkCD61euiwXOhBEh5cBgv3ETAxJ8PIyjRGEhpwizCQxqlIZYKudcvbgFgOl6WbfgrCAyXu8vmW8ZCgY9Rngdz00rgwaxCsy";
         private const string StripePublishableKey = "pk_test_51OfEkCD61euiwXOhBPjJPrNCF3ecfexHkZsBupWqFjAZTWK5VzD1qnQTvXlaRPBgXjCZsq1cZQr1Bfx8zYktTCKf00FPyCDhm9";

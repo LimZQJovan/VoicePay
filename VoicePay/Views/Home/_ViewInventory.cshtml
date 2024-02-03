@@ -31,11 +31,9 @@
                         <td>@item.SupplierContactNo</td>
                         <td>
                             <!-- Add a link to edit the inventory item -->
-                            <a asp-controller="Home" asp-action="EditInventory" asp-route-id="@item.InventoryID">Edit</a> |
-                            |
+                            <a asp-controller="Home" asp-action="EditInventory" asp-route-id="@item.InventoryID">Edit</a>|
                             <!-- Add a link to delete the inventory item -->
-                            <a asp-action="DeleteInventory" asp-controller="Home"
-                       asp-route-id="@item.InventoryID">Delete</a>
+                            <a asp-action="DeleteInventory" asp-controller="Home" asp-route-id="@item.InventoryID">Delete</a>
                         </td>
                     </tr>
                 }
