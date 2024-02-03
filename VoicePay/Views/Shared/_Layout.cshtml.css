@@ -1,6 +1,15 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+#google_translate_element {
+    display: inline-block;
+}
 
+@media only screen and (max-width: 600px) {
+    #google_translate_element {
+        display: block;
+        margin: 10px auto;
+    }
+}
 @media (max-width: 768px) {
     /* Your responsive styles for smaller screens */
     .navbar-collapse {

@@ -27,7 +27,7 @@
 
     </ul> *@
     <div class="topnav">
-        <a class="active" href="/Home/StallMain">Hawk'Ah</a>
+        <a class="active notranslate" href="/Home/StallMain">Hawk'Ah</a>
         <div id="google_translate_element"></div>
         <button class="increaseBtn" onclick="changeFontSize(1.1)">A+</button>
         <button class="decreaseBtn" onclick="changeFontSize(0.99)">A-</button>
@@ -71,23 +71,23 @@
         <span class="nav__text">Report</span>
         </a>*@
         <a href="/Home/Admin" class="nav__link">
-            <i class="material-icons nav__icon">summarize</i>
+            <i class="material-icons nav__icon notranslate">summarize</i>
             <span class="nav__text">Admin</span>
         </a>
         <a href="/Home/NumberPad" class="nav__link">
-            <i class="material-icons nav__icon">dialpad</i>
+            <i class="material-icons nav__icon notranslate">dialpad</i>
             <span class="nav__text">Number Pad</span>
         </a>
         <a href="/Home/VoicePay" class="nav__link">
-            <i class="material-icons nav__icon">mic</i>
+            <i class="material-icons nav__icon notranslate">mic</i>
             <span class="nav__text">Voice</span>
         </a>
         <a href="#" class="nav__link">
-            <i class="material-icons nav__icon">account_balance_wallet</i>
+            <i class="material-icons nav__icon notranslate">account_balance_wallet</i>
             <span class="nav__text">Bank Detail</span>
         </a>
         <a href="/Home/Language" class="nav__link">
-            <i class="material-icons nav__icon">language</i>
+            <i class="material-icons nav__icon notranslate">language</i>
             <span class="nav__text">Language</span>
         </a>
         @* <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a> *@
@@ -120,15 +120,27 @@
     });
     </script>*@
     <script src="script.js"></script>
-    <script type="text/javascript">
+@*    <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement(
                 { pageLanguage: 'en' },
                 'google_translate_element'
             );
         }
+    </script>*@
+    <script type="text/javascript">
+        //function googleTranslateElementInit() {
+        //    new google.translate.TranslateElement({
+        //        pageLanguage: 'en',  // Replace with your starting language
+        //        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        //    }, 'google_translate_element');
+        //}
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en', includedLanguages: 'en,zh-CN,zh-TW,ta,ms', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
+        }
     </script>
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
