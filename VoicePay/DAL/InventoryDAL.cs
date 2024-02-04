@@ -68,7 +68,7 @@ namespace VoicePay.DAL
             //retrieves all attributes of a staff record.
             cmd.CommandText = @"SELECT * FROM Inventory
             WHERE InventoryID = @selectedInventoryId
-            AND AccID = '@accId'";
+            AND AccID = @accId";
             //Define the parameter used in SQL statement, value for the
             //parameter is retrieved from the method parameter “staffId”.
             cmd.Parameters.AddWithValue("@selectedInventoryId", InventoryId);
@@ -96,16 +96,62 @@ namespace VoicePay.DAL
             conn.Close();
             return inventory;
         }
+        public void Add(Inventory inventory)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            //Specify an INSERT SQL statement which will
+            //return the auto-generated StaffID after insertion
+            cmd.CommandText = @"INSERT INTO Inventory (InventoryID, ItemName, Quantity, SupplierName, SupplierContactNo,AccId)
+                            VALUES(@InventoryID, @ItemName, @Quantity, @SupplierName, @SupplierContactNo, @AccId)";
+            //Define the parameters used in SQL statement, value for each parameter
+            //is retrieved from respective class's property.
+            cmd.Parameters.AddWithValue("@InventoryID", inventory.InventoryID);
+            cmd.Parameters.AddWithValue("@ItemName", inventory.ItemName);
+            cmd.Parameters.AddWithValue("@Quantity", inventory.Quantity);
+            cmd.Parameters.AddWithValue("@SupplierName", inventory.SupplierName);
+            cmd.Parameters.AddWithValue("@SupplierContactNo", inventory.SupplierContactNo);
+            cmd.Parameters.AddWithValue("@AccId", inventory.AccId);
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+            cmd.ExecuteNonQuery();
+            //A connection should be closed after operations.
+            conn.Close();
+        }
 
+
+        public int CountItems(string AccId)
+        {
+            // Create a SqlCommand object from the connection object
+            SqlCommand cmd = conn.CreateCommand();
+
+            // Specify the SQL statement to count the number of parcels with the given delivery status for the given delivery man
+            cmd.CommandText = @"SELECT COUNT(*) FROM Inventory
+                                WHERE AccId = @AccId";
+
+            // Add the parameters for the deliveryManID and deliveryStatus
+            cmd.Parameters.AddWithValue("@AccId", AccId);
+
+            // Open the database connection
+            conn.Open();
+
+            // Execute the SQL command and get the count of assigned parcels
+            int itemCounts = Convert.ToInt32(cmd.ExecuteScalar());
+
+            // Close the database connection
+            conn.Close();
+
+            return itemCounts;
+        }
         public int Update(Inventory inventory)
         {
             //Create a SqlCommand object from connection object
             SqlCommand cmd = conn.CreateCommand();
             //Specify an UPDATE SQL statement
-            cmd.CommandText = @"UPDATE Inventory SET ItemName='@ItemName',
-                                Quantity=@Quantity, SupplierName = '@SupplierName',
-                                SupplierContactNo = '@SupplierContactNo'
-                                WHERE InventoryID = @selectedInventoryID";
+            cmd.CommandText = @"UPDATE Inventory SET ItemName= @ItemName,
+                                      Quantity = @Quantity, SupplierName = @SupplierName,
+                                      SupplierContactNo = @SupplierContactNo
+                                      WHERE InventoryID = @selectedInventoryID";
             //Define the parameters used in SQL statement, value for each parameter
             //is retrieved from respective class's property.
             cmd.Parameters.AddWithValue("@ItemName", inventory.ItemName);
@@ -120,6 +166,28 @@ namespace VoicePay.DAL
             //Close the database connection
             conn.Close();
             return count;
+        }
+
+
+        public int Delete(int InventoryID, string AccId)
+        {
+            //Instantiate a SqlCommand object, supply it with a DELETE SQL statement
+            //to delete a staff record specified by a Staff ID
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = @"DELETE FROM Inventory
+                                WHERE InventoryID = @selectInventoryID
+                                AND AccId = @selectAccId";
+            cmd.Parameters.AddWithValue("@selectInventoryID", InventoryID);
+            cmd.Parameters.AddWithValue("@selectAccId", AccId);
+            //Open a database connection
+            conn.Open();
+            int rowAffected = 0;
+            //Execute the DELETE SQL to remove the staff record
+            rowAffected += cmd.ExecuteNonQuery();
+            //Close database connection
+            conn.Close();
+            //Return number of row of staff record updated or deleted
+            return rowAffected;
         }
 
     }
