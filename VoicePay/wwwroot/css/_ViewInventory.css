@@ -17,12 +17,11 @@
     padding: 8px;
     border: 1px solid #ddd;
     text-align: left;
-    background-color: lightgreen; /* Adjust the color here */
 }
 
 /* Header cell background color */
 .table-responsive th {
-    background-color: darkgreen; /* Adjust the color here */
+    background-color: #04AA6D; /* Adjust the color here */
     color: white;
 }
 

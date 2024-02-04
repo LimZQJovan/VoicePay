@@ -4,8 +4,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="~/css/_ViewReport.css">
-        @*<link rel="stylesheet" href="~/css/_ViewReport.css">*@
-
     </head>
     <div class="custom-table-responsive">
         <table class="table table-striped">
@@ -45,5 +43,8 @@
 }
 else
 {
-    <span style="color:red">No transactions found!</span>
+    <div class="text-center">
+        <!-- Center-align the message -->
+        <span style="color:red">No transactions found!</span>
+    </div>
 }
