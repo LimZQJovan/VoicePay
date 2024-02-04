@@ -123,34 +123,66 @@ namespace VoicePay.Controllers
             List<Inventory> inventoryList = inventoryContext.GetInventoryDetails(accId);
             return View(inventoryList);
         }
+		public ActionResult CreateInventory()
+		{
+			return View();
+		}
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult CreateInventory(Inventory inventory)
+		{
 
-        public ActionResult EditInventory(int? id)
-        {
             string accId = HttpContext.Session.GetString("AccId");
-            if (id == null)
-            {
+            
+            if (ModelState.IsValid)
+			{
+                Inventory inventoryModel = new Inventory
+                {
+                    InventoryID = inventoryContext.CountItems(accId) + 1,
+                    ItemName = inventory.ItemName,
+                    Quantity = inventory.Quantity,
+                    SupplierName = inventory.SupplierName,
+                    SupplierContactNo = inventory.SupplierContactNo,
+                    AccId = accId
+                };
+                inventoryContext.Add(inventoryModel);                
+                // Redirect user to Staff/Index view
                 return RedirectToAction("Inventory");
-            }
-            Inventory inventory = inventoryContext.GetInventoryItem(id.Value, accId);
-            if (inventory == null)
-            {
-                // Return to the listing page, not allowed to edit
-                return RedirectToAction("Inventory");
-            }
-            return View(inventory);
-        }
+			}
+			else
+			{
+				// Input validation fails, return to the Create view
+				// to display error message
+				return View(inventory);
+			}
+		}
+		//public ActionResult EditInventory(int? id)
+		//{
+		//    string accId = HttpContext.Session.GetString("AccId");
+		//    if (id == null)
+		//    {
+		//        return RedirectToAction("Inventory");
+		//    }
+		//    Inventory inventory = inventoryContext.GetInventoryItem(id.Value, accId);
+		//    if (inventory == null)
+		//    {
+		//        // Return to the listing page, not allowed to edit
+		//        return RedirectToAction("Inventory");
+		//    }
+		//    return View(inventory);
+		//}
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditInventory(Inventory inventory)
-        {
+		//[HttpPost]
+		//[ValidateAntiForgeryToken]
+		//public ActionResult EditInventory(Inventory inventory)
+		//{
 
-            //Update staff record to database
-            inventoryContext.Update(inventory);
-            return RedirectToAction("Inventory");
-        }
+		//    //Update staff record to database
+		//    inventoryContext.Update(inventory);
+		//    return RedirectToAction("Inventory");
+		//}
 
-        private const string StripeSecretKey = "sk_test_51OfEkCD61euiwXOhBEh5cBgv3ETAxJ8PIyjRGEhpwizCQxqlIZYKudcvbgFgOl6WbfgrCAyXu8vmW8ZCgY9Rngdz00rgwaxCsy";
+		private const string StripeSecretKey = "sk_test_51OfEkCD61euiwXOhBEh5cBgv3ETAxJ8PIyjRGEhpwizCQxqlIZYKudcvbgFgOl6WbfgrCAyXu8vmW8ZCgY9Rngdz00rgwaxCsy";
         private const string StripePublishableKey = "pk_test_51OfEkCD61euiwXOhBPjJPrNCF3ecfexHkZsBupWqFjAZTWK5VzD1qnQTvXlaRPBgXjCZsq1cZQr1Bfx8zYktTCKf00FPyCDhm9";
 
         private string GenerateStripeCheckoutSession(float amount)

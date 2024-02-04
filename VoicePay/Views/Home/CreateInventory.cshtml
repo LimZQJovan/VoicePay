@@ -1,68 +1,69 @@
 ﻿@model VoicePay.Models.Inventory
+@using Microsoft.AspNetCore.Http
 
 @{
- ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Inventory";
 }
+<h4 class="PageTitle">Create Inventory</h4>
 
-<h4 class="PageTitle">Add Staff Record</h4>
 <hr />
-<form asp-action="Create">
- <fieldset class="FormContent">
-     <div class="row mb-3">
-     <label asp-for="ItemName"
-     class="col-sm-3 col-form-label"></label>
-     <div class="col-sm-9 col-md-5">
+<div class="container mt-4">
+    <form asp-action="CreateInventory">
+        <fieldset class="FormContent">
+            <div class="row mb-3" hidden>
+                <label asp-for="InventoryID" class="col-md-3 col-form-label">Inventory ID:</label>
+                <div class="col-md-9">
+                    <input asp-for="InventoryID" class="form-control" value=0/>
+                    <span asp-validation-for="InventoryID" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label asp-for="ItemName" class="col-md-3 col-form-label">Item Name:</label>
+                <div class="col-md-9">
                     <input asp-for="ItemName" class="form-control" />
-                    <span asp-validation-for="ItemName"
-     class="text-danger"></span>
-     </div>
-     </div>
- <div class="row mb-3">
-            <label asp-for="Quantity"
- class="col-sm-3 col-form-label"></label>
- <div class="col-sm-9 col-md-5">
- <div class="form-group form-check-inline">
- <label class="col-form-label">
-                        <input asp-for="Quantity" type="radio" value="M"
- checked class="form-check-input" />
- <span style="font-weight:normal;
- padding-right:20px">Male</span>
- </label>
-<label class="col-form-label">
-                        <input asp-for="Quantity" type="radio" value="F"
- class="form-check-input" />
- <span style="font-weight:normal;
- padding-right:20px">Female</span>
- </label>
- </div>
- </div>
- </div>
- <div class="row mb-3">
- <label asp-for="SupplierName"
- class="col-sm-3 col-form-label"></label>
- <div class="col-sm-9 col-md-5">
-                <input asp-for="SupplierName" class="form-control" />
-                <span asp-validation-for="SupplierName"
- class="text-danger"></span>
+                    <span asp-validation-for="ItemName" class="text-danger"></span>
+                </div>
             </div>
-        </div>
-        <div class="row mb-3">
-            <label asp-for="SupplierContactNo"
-                   class="col-sm-3 col-form-label"></label>
-            <div class="col-sm-9 col-md-5">
-                <input asp-for="SupplierContactNo" class="form-control" />
-                <span asp-validation-for="SupplierContactNo"
-                      class="text-danger"></span>
+            <div class="row mb-3">
+                <label asp-for="Quantity" class="col-md-3 col-form-label">Quantity:</label>
+                <div class="col-md-9">
+                    <input asp-for="Quantity" type="number" class="form-control" />
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                </div>
             </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-sm-9 offset-sm-3">
-                <input type="submit" value="Create"
-                       class="btn btn-primary" />
+            <div class="row mb-3">
+                <label asp-for="SupplierName" class="col-md-3 col-form-label">Supplier Name:</label>
+                <div class="col-md-9">
+                    <input asp-for="SupplierName" class="form-control" />
+                    <span asp-validation-for="SupplierName" class="text-danger"></span>
+                </div>
             </div>
-        </div>
-        <div>
-            <a asp-action="Inventory">Back to List</a>
-        </div>
-    </fieldset>
-</form>
+            <div class="row mb-3">
+                <label asp-for="SupplierContactNo" class="col-md-3 col-form-label">Supplier Contact:</label>
+                <div class="col-md-9">
+                    <input asp-for="SupplierContactNo" class="form-control" />
+                    <span asp-validation-for="SupplierContactNo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3" hidden>
+                <label asp-for="AccId" class="col-md-3 col-form-label">Acc ID:</label>
+                <div class="col-md-9">
+                    <input asp-for="AccId" class="form-control" value="NA" />
+                    <span asp-validation-for="AccId" class="text-danger"></span>
+                </div>
+            </div>
+            <!-- Add hidden field for InventoryID -->
+            <div class="row mb-3">
+                <div class="col-md-9 offset-md-3">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-9 offset-md-3">
+                    <a asp-action="Inventory" class="btn btn-secondary">Back to List</a>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
