@@ -38,6 +38,7 @@ button {
     padding: 8px;
     border: 1px solid #ddd;
     text-align: left;
+    white-space: normal;
 }
 /* Header cell background color */
 .table-responsive th {
@@ -118,7 +119,7 @@ body {
 @media only screen and (max-width: 600px) {
     .table-responsive th,
     .table-responsive td {
-        font-size: 10px;
+        font-size: 13px;
     }
     button {
         width: 100%; /* Make the button full width on smaller screens */
