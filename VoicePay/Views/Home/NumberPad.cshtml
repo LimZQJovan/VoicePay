@@ -21,8 +21,7 @@
                     <input type="button" value="1" onclick="appendValue('1')">
                     <input type="button" value="2" onclick="appendValue('2')">
                     <input type="button" value="3" onclick="appendValue('3')">
-                    <input type="button" value="backspace" onclick="backspace()" class="material-symbols-outlined">
-
+                    <input type="button" value="backspace" onclick="backspace()" class="material-symbols-outlined notranslate">
                 </div>
                 <div>
                     <input type="button" value="4" onclick="appendValue('4')">
@@ -43,8 +42,8 @@
                 </div>
                 <div>
                     <div>
-                        <input type="button" value="TakeAway" onclick="appendValue('0.3')" class="TA">
-                        <input type="button" value="Edit" onclick="window.location.href='NumberPadCustomise.cshtml'" class="CUST">
+                        <input type="button" id="custombutton" style="width: 65%; color: white; background-color: cadetblue;" class="TA notranslate">
+                        <input type="button" value="Edit" onclick="window.location.href='NumberPadCustomise'" style="width: 40%; color: white; background-color: cadetblue;" class="material-symbols-outlined edit notranslate">
                     </div>
                 </div>
             </form>
@@ -83,7 +82,14 @@
 
             displayInput.value = currentDisplay + value;
 
-            updateResult();
+            if (displayInput.value.includes('x')) {
+                const replacedInput = displayInput.value.replace('x', '*');
+                updateResult(replacedInput);
+            } 
+            else
+            {
+                updateResult(displayInput.value);
+            }
         }
 
         function backspace() {
@@ -92,19 +98,14 @@
 
             displayInput.value = currentDisplay.slice(0, -1);
 
-            updateResult();
+            updateResult(displayInput.value);
         }
 
-        function updateResult() {
-            const displayValue = document.querySelector('input[name="display"]').value;
+        function updateResult(input) {
+            const displayValue = input || 0;
+            const result = Function('"use strict";return (' + displayValue + ')')();
+            document.querySelector('input[name="display-result"]').value = result;
 
-            try {
-                const result = Function('"use strict";return (' + displayValue + ')')();
-                document.querySelector('input[name="display-result"]').value = result;
-            } catch (error) {
-                // Handle any potential errors
-                document.querySelector('input[name="display-result"]').value = "Error";
-            }
         }
 
         function calculateAndRedirect() {
@@ -113,6 +114,31 @@
             window.location.href = `/Home/QR?amount=${encodeURIComponent(result)}`;
         }
 
+        // Function to retrieve edited values from localStorage
+        function retrieveEditedValues() {
+            const editedValue = localStorage.getItem('currentValue');
+            const editedText = localStorage.getItem('currentText');
+            return { editedValue, editedText };
+        }
+
+        function editButton(newValue, newText) {
+            const custombutton = document.getElementById('custombutton');
+            custombutton.value = newText;
+            custombutton.setAttribute('onclick', `appendValue('${newValue}')`);
+        }
+        // Check for edited values when the main page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            const { editedValue, editedText } = retrieveEditedValues();
+
+            // Check if there are edited values and apply them
+            if (editedValue !== null && editedText !== null) {
+                editButton(editedValue, editedText);
+
+                // Clear the edited values from localStorage
+                localStorage.removeItem('editedValue');
+                localStorage.removeItem('editedText');
+            }
+        });
     </script>
 
     </body>
