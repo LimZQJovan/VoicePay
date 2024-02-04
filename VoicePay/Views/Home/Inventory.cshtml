@@ -4,7 +4,19 @@
 }
 
 <style>
+    .custompri {
+        background-color: #04AA6D;
+    }
 
+        .custompri:hover {
+        background-color: #04AA6D;
+        color: #ffffff;
+    }
+
+        .custompri:active {
+        background-color: #04AA6D;
+        box-shadow: 0 5px #666;
+    }
 </style>
 
 <h4 class="PageTitle">View Inventory</h4>
@@ -13,8 +25,9 @@
 <partial name="_ViewInventory.cshtml" model="@Model" />
 
 <div class="text-center">
-    <button type="button" class="btn btn-success" onclick="redirectToCreateInventory()">
-        <span aria-hidden="true">+</span></button>
+    <button type="button" class="btn custompri" onclick="redirectToCreateInventory()">
+        <span style="color: white;" aria-hidden="true">+</span>
+    </button>
 </div>
 <script>
     function redirectToCreateInventory() {

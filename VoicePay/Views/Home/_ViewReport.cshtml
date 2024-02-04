@@ -5,16 +5,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="~/css/_ViewReport.css">
     </head>
-    <div class="custom-table-responsive">
-        <table class="table table-striped">
-            <thead>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead class="table-light">
                 <tr>
                     <th>Payee Name</th>
                     <th>Tel No</th>
                     <th>Amount</th>
                     <th>Transaction Date</th>
                     <th>Reference No</th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -28,7 +27,7 @@
                         <td>@item.MobileNo</td>
                         <td>@item.Amount.ToString("0.00")</td>
                         <td>@item.TransactionDateTime</td>
-                        <td>@item.ReferenceNo</td>
+						<td>@item.ReferenceNo</td>
                     </tr>
                     total += item.Amount;
                 }

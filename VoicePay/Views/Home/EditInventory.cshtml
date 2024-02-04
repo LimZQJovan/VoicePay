@@ -9,6 +9,24 @@
     .col-md-3 {
         font-weight: bold
     }
+
+    .custom-btn-primary {
+        background-color: #04AA6D; /* Custom color for primary button */
+        color: #ffffff; /* Text color for primary button */
+        border: none;
+        cursor: pointer;
+    }
+
+        .custom-btn-primary:hover {
+            background-color: #04AA6D;
+            color: #ffffff;
+        }
+
+        .custom-btn-primary:active {
+            background-color: #04AA6D;
+            box-shadow: 0 5px #666;
+        }
+
 </style>
 
 <hr />
@@ -45,13 +63,9 @@
                 </div>
             </div>
             <input type="hidden" asp-for="InventoryID" />
-            <div class="row mb-3">
-                <div class="col-md-9 offset-md-3">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-md-9 offset-md-3">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <input type="submit" value="Confirm" class="btn custom-btn-primary" />
                     <a asp-action="Inventory" class="btn btn-secondary">Back to List</a>
                 </div>
             </div>
