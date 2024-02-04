@@ -1,5 +1,5 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+﻿ Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. 
 #google_translate_element {
     display: inline-block;
 }
@@ -11,9 +11,9 @@ for details on configuring this project to bundle and minify static web assets. 
     }
 }
 @media (max-width: 768px) {
-    /* Your responsive styles for smaller screens */
+     Your responsive styles for smaller screens 
     .navbar-collapse {
-        /* For collapsing the navigation menu */
+         For collapsing the navigation menu 
         display: none;
     }
 
@@ -61,7 +61,7 @@ for details on configuring this project to bundle and minify static web assets. 
     }   
 }
 
-/*.footer, container {
+.footer, container {
     position: fixed;
     left: 0;
     bottom: 0;
@@ -70,7 +70,7 @@ for details on configuring this project to bundle and minify static web assets. 
     color: white;
     text-align: left;
 }
-*/
+
 body {
     margin: 0 0 55px 0;
 }

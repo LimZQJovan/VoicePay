@@ -1,40 +1,35 @@
-.center {
+body {
     display: flex;
-    /*flex-direction: flex-start;*/ /* Arrange items vertically */
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+header {
+    /* Your styling for the navigation bar goes here */
+}
+
+.center {
+    text-align: center;
+    margin-top: 20px; /* Adjust margin-top as needed */
+}
+
+#google_translate_element {
+    max-width: 100%; /* Ensure it doesn't exceed the screen width */
+}
+
+/* Media query for mobile view */
+@media (max-width: 768px) {
+    #google_translate_element {
+        width: 80%; /* Adjust width for smaller screens */
+    }
+}
+
+.center-content {
+    /* Additional styling for centering the main content below the navigation bar */
+    flex-grow: 1; /* Take up remaining vertical space */
+    display: flex;
     justify-content: center;
     align-items: center;
-    height: 200px;
-}
-
-.button {
-    background-color: #000000;
-    border: none;
-    color: white;
-    padding: 25px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 4px;
-    cursor: pointer;
-    box-shadow: 5px 10px #888888;
-}
-
-.button4 {
-    border-radius: 12px;
-}
-
-/* Media query for smaller screens */
-@media screen and (max-width: 400px) {
-    .center {
-        height: auto; /* Allow container to expand based on content */
-    }
-    .center {
-        flex-direction: column;
-    }
-
-    .button {
-        padding: 10px; /* Further adjusted padding for smaller screens */
-        font-size: 14px; /* Decrease font size for smaller screens */
-    }
 }
