@@ -26,18 +26,43 @@
     </div>
 
 	<script>
-		// Check if the URL has a success parameter indicating a successful payment
-		const urlParams = new URLSearchParams(window.location.search);
-		const paymentSuccess = urlParams.get('success');
+        function checkFlag() {
+            fetch('/webhook/CheckFlag')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.paymentProcessed);
+                    if (data.paymentProcessed) {
+                        // Payment has been processed, take appropriate action
+                        console.log('Payment processed!');
+                        fetch('/webhook/Reset', { // Corrected syntax
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                            .then(() => {
+                                // After resetting, redirect to the confirmation page
+                                window.location.href = '/Home/Confirm';
+                            })
+                            .catch(error => {
+                                console.error('Error resetting flag:', error);
+                            });
+                    } else {
+                        // Payment is still being processed or hasn't started
+                        console.log('Payment not yet processed.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking flag:', error);
+                });
+        }
 
-		if (paymentSuccess === 'true') {
-			// Perform any additional logic for successful payments
+        // Call checkFlag periodically (adjust the interval as needed)
+        setInterval(checkFlag, 5000); // Check every 5 seconds
 
-			// Redirect to the desired confirmation page on your website
-			window.location.href = '/Home/Confirm';
-		} else {
-			// Handle other cases or display an error message
-		}
+
+        // Call checkFlag periodically (adjust the interval as needed)
+        setInterval(checkFlag, 5000); // Check every 5 seconds
 	</script>
 </body>
 </html>
