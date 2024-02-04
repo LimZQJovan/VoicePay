@@ -1,55 +1,15 @@
 ﻿@model IEnumerable<VoicePay.Models.Inventory>
 
+
+
 @if (Model.ToList().Count > 0)
 {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-            /* General styles for the table */
-            .table-responsive table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-
-            /* Container styles */
-            .container {
-                max-width: 100%;
-                margin: auto;
-                overflow-x: auto;
-            }
-
-            /* Table cell styles */
-            .table-responsive th,
-            .table-responsive td {
-                padding: 8px;
-                border: 1px solid #ddd;
-                text-align: left;
-                background-color: lightgreen; /* Adjust the color here */
-            }
-
-            /* Header cell background color */
-            .table-responsive th {
-                background-color: darkgreen; /* Adjust the color here */
-                color: white;
-            }
-
-            /* Responsive styling */
-            .table-responsive {
-                display: block;
-                overflow-x: auto;
-                white-space: nowrap;
-            }
-
-            /* Responsive font size for small screens */
-            @media only screen and (max-width: 600px) {
-                .table-responsive th,
-                .table-responsive td {
-                    font-size: 10px;
-                }
-            }
-        </style>
+        <link rel="stylesheet" href="~/css/_ViewInventory.css">
     </head>
+
     <div class="table-responsive">
         <table id="viewInventory" class="table table-striped table-bordered">
             <thead class="table-dark">
