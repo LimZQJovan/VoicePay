@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using VoicePay.DAL;
 using VoicePay.Models;
@@ -19,6 +20,7 @@ namespace VoicePay.Controllers
         private readonly ILogger<HomeController> _logger;
         TransactionDAL transactionContext = new TransactionDAL();
         StaffDAL staffContext = new StaffDAL();
+        InventoryDAL inventoryContext = new InventoryDAL();
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -44,6 +46,7 @@ namespace VoicePay.Controllers
             if (staffContext.Login(loginID, password, out UEN, out stallName, out location))
             {
                 HttpContext.Session.SetString("UEN", UEN);
+                HttpContext.Session.SetString("AccId", loginID);
                 HttpContext.Session.SetString("Name", stallName);
                 HttpContext.Session.SetString("Location", location);
                 // Redirect user to the "StaffMain" view through an action
@@ -101,6 +104,11 @@ namespace VoicePay.Controllers
 			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 		}
 
+        public ActionResult Admin()
+        {
+            return View("Admin");
+        }
+
         public ActionResult Report(string UEN, int selectedYear, int selectedMonth, int selectedDay)
         {
             int dtYear = selectedYear == -1 ? DateTime.Now.Year : selectedYear;
@@ -109,6 +117,38 @@ namespace VoicePay.Controllers
             UEN = HttpContext.Session.GetString("UEN");
             List<Transaction> transactionList = transactionContext.GetTransactions(UEN, dtYear, dtMonth, dtDay);
             return View(transactionList);
+        }
+        public ActionResult Inventory()
+        {
+            string accId = HttpContext.Session.GetString("AccId");
+            List<Inventory> inventoryList = inventoryContext.GetInventoryDetails(accId);
+            return View(inventoryList);
+        }
+
+        public ActionResult EditInventory(int? id)
+        {
+            string accId = HttpContext.Session.GetString("AccId");
+            if (id == null)
+            {
+                return RedirectToAction("Inventory");
+            }
+            Inventory inventory = inventoryContext.GetInventoryItem(id.Value, accId);
+            if (inventory == null)
+            {
+                // Return to the listing page, not allowed to edit
+                return RedirectToAction("Inventory");
+            }
+            return View(inventory);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditInventory(Inventory inventory)
+        {
+
+            //Update staff record to database
+            inventoryContext.Update(inventory);
+            return RedirectToAction("Inventory");
         }
 
         private const string StripeSecretKey = "sk_test_51OfEkCD61euiwXOhBEh5cBgv3ETAxJ8PIyjRGEhpwizCQxqlIZYKudcvbgFgOl6WbfgrCAyXu8vmW8ZCgY9Rngdz00rgwaxCsy";

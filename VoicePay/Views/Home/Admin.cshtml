@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator using javascript - Easy Tutorials</title>
+    <link rel="stylesheet" href="~/css/NumberPad.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+    <style>
+        .button {
+            display: block;
+            margin-top: 10px;
+            padding: 15px 25px;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #04AA6D;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+            width: 100%;
+        }
+
+            .button:hover {
+                background-color: #3e8e41
+            }
+
+            .button:active {
+                background-color: #3e8e41;
+                box-shadow: 0 5px #666;
+                transform: translateY(4px);
+            }
+    </style>
+
+    <div class="container">
+
+            <button class="button" id="reportButton">Report</button>
+            <button class="button" id="inventoryButton">Inventory Management</button>
+
+    </div>
+
+    <script>
+            // Add click event listener to the Report button
+            document.getElementById("reportButton").addEventListener("click", function () {
+                // Redirect to "/Home/Report" when the Report button is clicked
+                window.location.href = "/Home/Report";
+            });
+
+            // Add click event listener to the Inventory button
+            document.getElementById("inventoryButton").addEventListener("click", function () {
+                // Redirect to "/InventoryManagement" when the Inventory button is clicked
+                window.location.href = "/Home/Inventory";
+            });
+    </script>
+
+</body>
+</html>

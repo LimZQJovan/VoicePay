@@ -1,0 +1,39 @@
+/* General styles for the table */
+.table-responsive table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Container styles */
+.container {
+    max-width: 100%;
+    margin: auto;
+    overflow-x: auto;
+}
+
+/* Table cell styles */
+.table-responsive th, .table-responsive td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+/* Header cell background color */
+.table-responsive th {
+    background-color: #f2f2f2;
+}
+
+/* Responsive styling */
+.table-responsive {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+/* Responsive font size for small screens */
+@media only screen and (max-width: 600px) {
+    .table-responsive th, .table-responsive td {
+        font-size: 10px;
+    }
+}
+

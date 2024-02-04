@@ -1,0 +1,54 @@
+﻿@model VoicePay.Models.Inventory
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h4 class="PageTitle">Delete Staff Record</h4>
+<hr />
+<form asp-action="Delete">
+    <fieldset class="FormContent">
+        <legend>Are you sure to delete this record?</legend>
+        <div class="row mb-3">
+            <label asp-for="ItemName"
+                   class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-9 col-md-5">
+                <input asp-for="ItemName" readonly
+                       class="form-control-plaintext" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="Quantity"
+                   class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-9 col-md-5">
+                <input asp-for="Quantity" readonly
+                       class="form-control-plaintext" />
+            </div>
+        </div>
+                <div class="row mb-3">
+            <label asp-for="SupplierName"
+                   class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-9 col-md-5">
+                <input asp-for="SupplierName" readonly
+                       class="form-control-plaintext" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="SupplierContactNo"
+                   class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-9 col-md-5">
+                <input asp-for="SupplierContactNo" readonly
+                       class="form-control-plaintext" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm-9 offset-sm-3">
+                <input type="submit" value="Delete"
+                       class="btn btn-primary" />
+            </div>
+        </div>
+        <div>
+            <a asp-action="Inventory">Back to List</a>
+        </div>
+    </fieldset>
+</form>
