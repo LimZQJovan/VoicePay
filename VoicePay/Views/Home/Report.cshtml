@@ -13,11 +13,11 @@
     <link rel="stylesheet" href="~/css/_ViewReport.css">
 </head>
 <body>
-    <h4 class="PageTitle" style="text-align: center;">Reports</h4>
+    <h2 class="PageTitle text-center" style=" font-weight:bold">Report</h2>
 
     <form asp-controller="Home" asp-action="Report" method="post">
-        <div class="date-filter-container">
-            <div class="date-filters">
+        <div class="date-filters d-flex justify-content-center">
+            <div class="flex-column">
                 <label for="day-select">Day:</label>
                 <select id="day-select" name="selectedDay">
                     <option value="-1">None</option>
@@ -52,9 +52,9 @@
                     <option value="29">29</option>
                     <option value="30">30</option>
                     <option value="31">31</option>
-
                 </select>
-
+            </div>
+            <div class="flex-column">
                 <label for="month-select">Month:</label>
                 <select id="month-select" name="selectedMonth">
                     <option value="-1">None</option>
@@ -71,22 +71,21 @@
                     <option value="11">Novemeber</option>
                     <option value="12">December</option>
                 </select>
-
+            </div>
+            <div class="flex-column">
                 <label for="year-select">Year:</label>
                 <select id="year-select" name="selectedYear">
                     <option value="-1">None</option>
                     <option value="2021">2021</option>
                     <option value="2022">2022</option>
                     <option value="2023">2023</option>
+                    <option value="2024">2024</option>
                 </select>
-
-                <button type="submit">Filter Data</button>
             </div>
-            
+            <button type="submit">Filter</button>
         </div>
     </form>
-
-</body>
+    </body>
 </html>
 
 <!-- Add a partial view to display a list of staff records

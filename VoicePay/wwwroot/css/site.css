@@ -177,7 +177,7 @@ body {
 .topnav {
     /*background-color: #333;
     overflow: hidden;*/
-    background-color: #333;
+    background-color: #04AA6D;
     overflow: hidden;
     display: flex; /* Add flex display for horizontal alignment */
     justify-content: space-between; /* Distribute items along the main axis */
@@ -224,7 +224,7 @@ body {
 
 .increaseBtn,
 .decreaseBtn {
-    margin-left: 10px; /* Adjust as needed */
+    margin-left: 10px;  /*Adjust as needed */
     background-color: grey;
     opacity: 80%;
     border-radius: 8px;
@@ -232,7 +232,10 @@ body {
 }
 
 #google_translate_element {
-    margin-right: 20px; /* Adjust margin between the logo and the dropdown */
+    width: 20%;
+    margin-bottom: 100px;
+    margin-top: 30px;
+    padding-right: 80px;
 }
 
 /* Add any other common styles */

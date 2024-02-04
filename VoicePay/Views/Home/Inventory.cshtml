@@ -2,8 +2,38 @@
 @{
     ViewData["Title"] = "View Inventory";
 }
-<h4 class="PageTitle">View Inventory</h4>
-<p><a asp-action="Create">Create Inventory Item</a></p>
+
+<style>
+    .custompri {
+        background-color: #04AA6D;
+    }
+
+        .custompri:hover {
+            background-color: #3e8e41;
+        color: #ffffff;
+    }
+
+        .custompri:active {
+            background-color: #3e8e41;
+        box-shadow: 0 5px #666;
+    }
+
+    .PageTitle
+</style>
+
+<h2 class="PageTitle text-center" style=" font-weight:bold">Inventory</h2>
 <!-- Add a partial view to display a list of staff records
  in a tabular format. -->
 <partial name="_ViewInventory.cshtml" model="@Model" />
+
+<div class="text-center">
+    <button type="button" class="btn custompri" onclick="redirectToCreateInventory()">
+        <span style="color: white;" aria-hidden="true">+</span>
+    </button>
+</div>
+<script>
+    function redirectToCreateInventory() {
+        // Use JavaScript to redirect to the desired URL
+        window.location.href = '@Url.Action("CreateInventory", "Home")';
+    }
+</script>

@@ -28,9 +28,9 @@
     </ul> *@
     <div class="topnav">
         <a class="active notranslate" href="/Home/StallMain">Hawk'Ah</a>
-        <div id="google_translate_element"></div>
-        <button class="increaseBtn" onclick="changeFontSize(1.1)">A+</button>
-        <button class="decreaseBtn" onclick="changeFontSize(0.99)">A-</button>
+        @* <div id="google_translate_element"></div> *@
+       @*  <button class="increaseBtn" onclick="changeFontSize(1.1)">A+</button>
+        <button class="decreaseBtn" onclick="changeFontSize(0.99)">A-</button> *@
         <div class="topnav-right">
             <a href="~/Home/LogOut">
                 <i class="fa fa-sign-out" aria-hidden="true"></i>
@@ -72,7 +72,7 @@
         </a>*@
         <a href="/Home/Admin" class="nav__link">
             <i class="material-icons nav__icon notranslate">summarize</i>
-            <span class="nav__text">Admin</span>
+            <span class="nav__text">Summary</span>
         </a>
         <a href="/Home/NumberPad" class="nav__link">
             <i class="material-icons nav__icon notranslate">dialpad</i>
@@ -128,7 +128,7 @@
             );
         }
     </script>*@
-    <script type="text/javascript">
+      <script type="text/javascript">
         //function googleTranslateElementInit() {
         //    new google.translate.TranslateElement({
         //        pageLanguage: 'en',  // Replace with your starting language
@@ -136,7 +136,7 @@
         //    }, 'google_translate_element');
         //}
         function googleTranslateElementInit() {
-            new google.translate.TranslateElement({ pageLanguage: 'en', includedLanguages: 'en,zh-CN,zh-TW,ta,ms', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
+            new google.translate.TranslateElement({ pageLanguage: 'en', includedLanguages: 'en,zh-CN,zh-TW,ta,ms', /* layout: google.translate.TranslateElement.InlineLayout.SIMPLE */ }, 'google_translate_element');
         }
     </script>
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>

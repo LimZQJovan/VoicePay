@@ -1,41 +1,61 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
-.custom-table-responsive {
+.table-responsive {
     position: relative;
     z-index: 1;
 }
 
 .table-responsive table {
     width: 100%;
-    min-width: 800px;
-    border-collapse: collapse; /* Optional: Remove border-spacing between cells */
+    border-collapse: collapse;
 }
 
+/* Add these styles for the button */
+button {
+    margin-top: 5px;
+    width: 100px;
+    background-color: #04AA6D;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+    cursor: pointer;
+}
+
+    button:hover {
+        background-color: #007B4E; /* Change the color on hover if desired */
+    }
+
+/* Container styles */
 .container {
-    position: relative;
-    z-index: 1;
-    max-width: 1200px;
+    max-width: 100%;
     margin: auto;
     overflow-x: auto;
 }
 
-.table-responsive th, .table-responsive td {
+/* Table cell styles */
+.table-responsive th,
+.table-responsive td {
     padding: 8px;
-    border: 1px solid #ddd; /* Add borders to cells */
+    border: 1px solid #ddd;
     text-align: left;
+    white-space: normal;
 }
-
+/* Header cell background color */
 .table-responsive th {
-    background-color: #f2f2f2; /* Background color for header cells */
+    background-color: #04AA6D; /* Adjust the color here */
+    color: white;
 }
 
+/* Responsive styling */
 .table-responsive {
     display: block;
+    overflow-x: auto;
+    white-space: nowrap;
 }
-
 .date-filter-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 10px; /* Adjust the gap to control spacing between date filters */
     justify-content: center;
     max-width: 100%;
 }
@@ -43,24 +63,48 @@
 .date-filters {
     display: flex;
     gap: 4px;
-    align-items: center; /* Align items vertically */
-}
-.date-filters select {
-    width: 100px; /* Set your desired width */
-}
-.date-filters label {
-    width: 100px;
-    max-width:100%;
-}
-.date-filters select,
-.date-filters label {
-margin: 0; /* Remove any margin */
+    align-items: center;
 }
 
+    .date-filters select {
+        width: 100px; /* Set your desired width */
+    }
 
+    .date-filters label {
+        width: 100px;
+        max-width: 100%;
+        white-space: nowrap; /* Prevent label from wrapping to a new line */
+    }
+
+    .date-filters select,
+    .date-filters label {
+        margin: 0;
+    }
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Add responsive styles */
+@media only screen and (max-width: 600px) {
+    .date-filters {
+        flex-direction: row; /* Stack elements vertically on smaller screens */
+    }
+
+    .flex-column {
+        margin-bottom: 10px; /* Adjust spacing between columns */
+    }
+}
 button {
     margin-top: 5px;
-    width: 100px;
+    width: auto; /* Change width to auto to make it adjust based on content */
+    background-color: #04AA6D;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
 }
 
 body {
@@ -71,9 +115,13 @@ body {
     max-width:100%
 }
 
-@media (max-width: 768px) {
-    .date-filters select {
-        width: calc(50% - 5px); /* Adjust based on your design */
+/* Responsive font size for small screens */
+@media only screen and (max-width: 600px) {
+    .table-responsive th,
+    .table-responsive td {
+        font-size: 13px;
+    }
+    button {
+        width: 100%; /* Make the button full width on smaller screens */
     }
 }
-
