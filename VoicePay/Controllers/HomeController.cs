@@ -159,33 +159,70 @@ namespace VoicePay.Controllers
 				return View(inventory);
 			}
 		}
-		//public ActionResult EditInventory(int? id)
-		//{
-		//    string accId = HttpContext.Session.GetString("AccId");
-		//    if (id == null)
-		//    {
-		//        return RedirectToAction("Inventory");
-		//    }
-		//    Inventory inventory = inventoryContext.GetInventoryItem(id.Value, accId);
-		//    if (inventory == null)
-		//    {
-		//        // Return to the listing page, not allowed to edit
-		//        return RedirectToAction("Inventory");
-		//    }
-		//    return View(inventory);
-		//}
+        public ActionResult EditInventory(int? id)
+        {
+            string accId = HttpContext.Session.GetString("AccId");
+            if (id == null)
+            {
+                return RedirectToAction("Inventory");
+            }
+            Inventory inventory = inventoryContext.GetInventoryItem(id.Value, accId);
+            if (inventory == null)
+            {
+                // Return to the listing page, not allowed to edit
+                return RedirectToAction("Inventory");
+            }
+            return View(inventory);
+        }
 
-		//[HttpPost]
-		//[ValidateAntiForgeryToken]
-		//public ActionResult EditInventory(Inventory inventory)
-		//{
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditInventory(Inventory inventory)
+        {
 
-		//    //Update staff record to database
-		//    inventoryContext.Update(inventory);
-		//    return RedirectToAction("Inventory");
-		//}
+            //Update staff record to database
+            inventoryContext.Update(inventory);
+            return RedirectToAction("Inventory");
+        }
 
-		private const string StripeSecretKey = "sk_test_51OfEkCD61euiwXOhBEh5cBgv3ETAxJ8PIyjRGEhpwizCQxqlIZYKudcvbgFgOl6WbfgrCAyXu8vmW8ZCgY9Rngdz00rgwaxCsy";
+        public ActionResult DeleteInventory(int? id)
+        {
+            string accId = HttpContext.Session.GetString("AccId");
+            if (id == null)
+            {
+                return RedirectToAction("Inventory");
+            }
+
+            Inventory inventory = inventoryContext.GetInventoryItem(id.Value, accId);
+            if (inventory == null)
+            {
+                return RedirectToAction("Inventory");
+            }
+
+            return View(inventory);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteInventory(int id)
+        {
+            string accId = HttpContext.Session.GetString("AccId");
+
+            // Ensure the inventory exists before attempting to delete
+            Inventory inventory = inventoryContext.GetInventoryItem(id, accId);
+            if (inventory == null)
+            {
+                return RedirectToAction("Inventory");
+            }
+
+            // Delete the staff record from the database
+            inventoryContext.Delete(id, accId);
+
+            return RedirectToAction("Inventory");
+        }
+
+
+        private const string StripeSecretKey = "sk_test_51OfEkCD61euiwXOhBEh5cBgv3ETAxJ8PIyjRGEhpwizCQxqlIZYKudcvbgFgOl6WbfgrCAyXu8vmW8ZCgY9Rngdz00rgwaxCsy";
         private const string StripePublishableKey = "pk_test_51OfEkCD61euiwXOhBPjJPrNCF3ecfexHkZsBupWqFjAZTWK5VzD1qnQTvXlaRPBgXjCZsq1cZQr1Bfx8zYktTCKf00FPyCDhm9";
 
         private string GenerateStripeCheckoutSession(float amount)
