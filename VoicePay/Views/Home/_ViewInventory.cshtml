@@ -14,7 +14,7 @@
 
     <div class="table-responsive">
         <table id="viewInventory" class="table table-striped table-bordered">
-            <thead class="table-light">
+            <thead class="table-light ">
                 <tr>
                     <th>ID</th>
                     <th>Item Name</th>
@@ -29,19 +29,19 @@
                 {
                     <tr>
                         <td>@item.InventoryID.ToString()</td>
-                        <td>@item.ItemName</td>
+                        <td class="notranslate">@item.ItemName</td>
                         <td>@item.Quantity.ToString()</td>
-                        <td>@item.SupplierName</td>
+                        <td class="notranslate">@item.SupplierName</td>
                         <td>@item.SupplierContactNo</td>
                         <td>
                             <!-- Edit button -->
                             <button class="btn btn-primary btn-sm btn-action" onclick="location.href='@Url.Action("EditInventory", "Home", new { id = item.InventoryID })'">
-                                <span class="material-symbols-outlined">edit</span>
+                                <span class="material-symbols-outlined notranslate">edit</span>
                             </button>
 
                             <!-- Delete button -->
                             <button class="btn btn-danger btn-sm btn-action" onclick="location.href='@Url.Action("DeleteInventory", "Home", new { id = item.InventoryID })'">
-                                <span class="material-symbols-outlined">delete</span>
+                                <span class="material-symbols-outlined notranslate">delete</span>
                             </button>
 
                         </td>
