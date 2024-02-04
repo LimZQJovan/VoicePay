@@ -21,7 +21,6 @@ namespace VoicePay.Controllers
         public async Task<IActionResult> StripeWebhook()
         {
             var json = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
-            Debug.WriteLine("HI");
 
             if (!string.IsNullOrEmpty(json))
             {
@@ -31,7 +30,6 @@ namespace VoicePay.Controllers
                 {
                     // Handle the completed Checkout Session
                     var session = stripeEvent.Data.Object as Session;
-                    Debug.WriteLine("Checkout session completed. Sending success response.");
                     paymentProcessed = true;
                 }
             }
