@@ -10,10 +10,11 @@ using Newtonsoft.Json;
 using System.Text;
 using Stripe;
 using Stripe.Checkout;
+using System.Reflection.Metadata.Ecma335;
 
 namespace VoicePay.Controllers
 {
-    
+
     public class HomeController : Controller
     {
 
@@ -176,9 +177,15 @@ namespace VoicePay.Controllers
             {
                 // Return to the listing page, not allowed to edit
                 return RedirectToAction("Inventory");
-            }
-            return View(inventory);
-        }
+			}
+			else
+			{
+				// Input validation fails, return to the Create view
+				// to display error message
+				return View(inventory);
+			}
+		}
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -300,16 +307,14 @@ namespace VoicePay.Controllers
             return View("QR");
         }
 
-        
-
         public ActionResult Confirm()
         {
+            Debug.WriteLine("BYE");
             float amount = float.TryParse(HttpContext.Session.GetString("amount"), out float parsedAmount) ? parsedAmount : 0.0f;
             transactionContext.AddTransaction(HttpContext.Session.GetString("UEN"), "5501234567", amount, DateTime.Now, "BNKREF6543210987");
             ViewData["amount"] = HttpContext.Session.GetString("amount");
             return View("Confirm");
         }
-
 
     }
 }
