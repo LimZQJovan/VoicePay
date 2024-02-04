@@ -5,41 +5,45 @@
 }
 <h4 class="PageTitle">Edit Inventory</h4>
 
+<style>
+    .col-md-3 {
+        font-weight: bold
+    }
+</style>
+
 <hr />
 <div class="container mt-4">
     <form asp-action="EditInventory" method="post">
         <fieldset class="FormContent">
 
-
             <div class="row mb-3">
                 <label asp-for="ItemName" class="col-md-3 col-form-label">Item Name:</label>
                 <div class="col-md-9">
-                    <input asp-for="ItemName" class="form-control" />
+                    <input asp-for="ItemName" value="@Model.ItemName" class="form-control" />        
                     <span asp-validation-for="ItemName" class="text-danger"></span>
                 </div>
             </div>
             <div class="row mb-3">
                 <label asp-for="Quantity" class="col-md-3 col-form-label">Quantity:</label>
                 <div class="col-md-9">
-                    <input asp-for="Quantity" type="number" class="form-control" />
+                    <input asp-for="Quantity" value="@Model.Quantity" type="number" class="form-control" />          
                     <span asp-validation-for="Quantity" class="text-danger"></span>
                 </div>
             </div>
             <div class="row mb-3">
                 <label asp-for="SupplierName" class="col-md-3 col-form-label">Supplier Name:</label>
                 <div class="col-md-9">
-                    <input asp-for="SupplierName" class="form-control" />
+                    <input asp-for="SupplierName" value="@Model.SupplierName" class="form-control" />           
                     <span asp-validation-for="SupplierName" class="text-danger"></span>
                 </div>
             </div>
             <div class="row mb-3">
                 <label asp-for="SupplierContactNo" class="col-md-3 col-form-label">Supplier Contact:</label>
                 <div class="col-md-9">
-                    <input asp-for="SupplierContactNo" class="form-control" />
+                    <input asp-for="SupplierContactNo" value="@Model.SupplierContactNo" class="form-control" />           
                     <span asp-validation-for="SupplierContactNo" class="text-danger"></span>
                 </div>
             </div>
-            <!-- Add hidden field for InventoryID -->
             <input type="hidden" asp-for="InventoryID" />
             <div class="row mb-3">
                 <div class="col-md-9 offset-md-3">

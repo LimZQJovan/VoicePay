@@ -119,6 +119,13 @@ namespace VoicePay.Controllers
             return View(transactionList);
         }
 
+        public ActionResult Inventory()
+        {
+            string accId = HttpContext.Session.GetString("AccId");
+            List<Inventory> inventoryList = inventoryContext.GetInventoryDetails(accId);
+            return View(inventoryList);
+        }
+
         // GET: Staff/Create
         public ActionResult CreateInventory()
         {
@@ -130,46 +137,25 @@ namespace VoicePay.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateInventory(Inventory inventory)
         {
-            try
+ 
+
+            if (ModelState.IsValid)
             {
-                string accId = HttpContext.Session.GetString("AccId");
-                int nextInventoryID = inventoryContext.CountItems(accId) + 1;
+
+                string AccId = HttpContext.Session.GetString("AccId");
+                int nextInventoryID = inventoryContext.CountItems(AccId) + 1;
                 inventory.InventoryID = nextInventoryID;
-                inventory.AccId = accId;
-
-                // Log Inventory data for debugging
-                Console.WriteLine($"InventoryID: {inventory.InventoryID}, ItemName: {inventory.ItemName}, Quantity: {inventory.Quantity}, SupplierName: {inventory.SupplierName}, SupplierContactNo: {inventory.SupplierContactNo}, AccId: {inventory.AccId}");
-
-                if (ModelState.IsValid)
-                {
-                    inventoryContext.Add(inventory);
-                    // Redirect user to Staff/Index view
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    // Input validation fails, return to the Create view
-                    // to display error message
-                    return View(inventory);
-                }
+                inventory.AccId = AccId;
+                inventoryContext.Add(inventory);
+                return RedirectToAction("Inventory");
             }
-            catch (Exception ex)
+            else
             {
-                // Log the exception for debugging
-                Console.WriteLine($"Exception: {ex.Message}");
-
-                // Handle the exception as needed
-                ModelState.AddModelError(string.Empty, "An error occurred while processing the form.");
+                // Input validation fails, return to the Create view
+                // to display error message
                 return View(inventory);
-            }
-        }
 
-
-        public ActionResult Inventory()
-        {
-            string accId = HttpContext.Session.GetString("AccId");
-            List<Inventory> inventoryList = inventoryContext.GetInventoryDetails(accId);
-            return View(inventoryList);
+            }                 
         }
 
         public ActionResult EditInventory(int? id)
@@ -200,6 +186,43 @@ namespace VoicePay.Controllers
         {
             // Update staff record to the database
             inventoryContext.Update(inventory);
+            return RedirectToAction("Inventory");
+        }
+
+        // GET: StaffController/Delete/5
+        public ActionResult DeleteInventory(int? id)
+        {
+            string accId = HttpContext.Session.GetString("AccId");
+            if (id == null)
+            {
+                return RedirectToAction("Inventory");
+            }
+
+            Inventory inventory = inventoryContext.GetInventoryItem(id.Value, accId);
+            if (inventory == null)
+            {
+                return RedirectToAction("Inventory");
+            }
+
+            return View(inventory);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteInventory(int id)
+        {
+            string accId = HttpContext.Session.GetString("AccId");
+
+            // Ensure the inventory exists before attempting to delete
+            Inventory inventory = inventoryContext.GetInventoryItem(id, accId);
+            if (inventory == null)
+            {
+                return RedirectToAction("Inventory");
+            }
+
+            // Delete the staff record from the database
+            inventoryContext.Delete(id, accId);
+
             return RedirectToAction("Inventory");
         }
 

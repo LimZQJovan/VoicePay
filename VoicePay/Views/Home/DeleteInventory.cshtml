@@ -1,54 +1,64 @@
 ﻿@model VoicePay.Models.Inventory
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Delete Inventory Records";
 }
+<style>
+    .col-md-3 {
+        font-weight:bold
+    }
+</style>
 
-<h4 class="PageTitle">Delete Staff Record</h4>
+
+<h4 class="PageTitle">Delete Inventory Record</h4>
 <hr />
-<form asp-action="Delete">
-    <fieldset class="FormContent">
-        <legend>Are you sure to delete this record?</legend>
-        <div class="row mb-3">
-            <label asp-for="ItemName"
-                   class="col-sm-3 col-form-label"></label>
-            <div class="col-sm-9 col-md-5">
-                <input asp-for="ItemName" readonly
-                       class="form-control-plaintext" />
+<div class="container mt-4">
+    <form asp-action="DeleteInventory" method="post">
+        <fieldset class="FormContent">
+            <legend>Are you sure to delete this record?</legend>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <label asp-for="ItemName" class="col-form-label">Item Name:</label>
+                </div>
+                <div class="col-md-9">
+                    <input asp-for="ItemName" readonly class="form-control-plaintext" />
+                </div>
             </div>
-        </div>
-        <div class="row mb-3">
-            <label asp-for="Quantity"
-                   class="col-sm-3 col-form-label"></label>
-            <div class="col-sm-9 col-md-5">
-                <input asp-for="Quantity" readonly
-                       class="form-control-plaintext" />
+
+            <div class="row">
+                <div class="col-md-3">
+                    <label asp-for="Quantity" class="col-form-label">Quantity:</label>
+                </div>
+                <div class="col-md-9">
+                    <input asp-for="Quantity" readonly class="form-control-plaintext" />
+                </div>
             </div>
-        </div>
-                <div class="row mb-3">
-            <label asp-for="SupplierName"
-                   class="col-sm-3 col-form-label"></label>
-            <div class="col-sm-9 col-md-5">
-                <input asp-for="SupplierName" readonly
-                       class="form-control-plaintext" />
+
+            <div class="row">
+                <div class="col-md-3">
+                    <label asp-for="SupplierName" class="col-form-label">Supplier Name:</label>
+                </div>
+                <div class="col-md-9">
+                    <input asp-for="SupplierName" readonly class="form-control-plaintext" />
+                </div>
             </div>
-        </div>
-        <div class="row mb-3">
-            <label asp-for="SupplierContactNo"
-                   class="col-sm-3 col-form-label"></label>
-            <div class="col-sm-9 col-md-5">
-                <input asp-for="SupplierContactNo" readonly
-                       class="form-control-plaintext" />
+
+            <div class="row">
+                <div class="col-md-3">
+                    <label asp-for="SupplierContactNo" class="col-form-label">Supplier Contact:</label>
+                </div>
+                <div class="col-md-9">
+                    <input asp-for="SupplierContactNo" readonly class="form-control-plaintext" />
+                </div>
             </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-sm-9 offset-sm-3">
-                <input type="submit" value="Delete"
-                       class="btn btn-primary" />
+
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                    <a asp-action="Inventory" class="btn btn-secondary">Back to List</a>
+                </div>
             </div>
-        </div>
-        <div>
-            <a asp-action="Inventory">Back to List</a>
-        </div>
-    </fieldset>
-</form>
+        </fieldset>
+    </form>
+</div>

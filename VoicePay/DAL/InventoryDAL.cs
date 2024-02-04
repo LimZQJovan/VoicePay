@@ -68,11 +68,11 @@ namespace VoicePay.DAL
             //retrieves all attributes of a staff record.
             cmd.CommandText = @"SELECT * FROM Inventory
             WHERE InventoryID = @selectedInventoryId
-            AND AccID = '@accId'";
+            AND AccID = @AccId";
             //Define the parameter used in SQL statement, value for the
             //parameter is retrieved from the method parameter “staffId”.
             cmd.Parameters.AddWithValue("@selectedInventoryId", InventoryId);
-            cmd.Parameters.AddWithValue("@accId", accId);
+            cmd.Parameters.AddWithValue("@AccId", accId);
             //Open a database connection
             conn.Open();
             //Execute SELCT SQL through a DataReader
@@ -122,7 +122,7 @@ namespace VoicePay.DAL
             return count;
         }
 
-        public void Add(Inventory inventory)
+        public int Add(Inventory inventory)
         {
             //Create a SqlCommand object from connection object
             SqlCommand cmd = conn.CreateCommand();
@@ -139,10 +139,14 @@ namespace VoicePay.DAL
             cmd.Parameters.AddWithValue("@SupplierContactNo", inventory.SupplierContactNo);
             cmd.Parameters.AddWithValue("@AccId", inventory.AccId);
             //A connection to database must be opened before any operations made.
+            int rowAffected = 0;
             conn.Open();
-            cmd.ExecuteNonQuery();
+
+            rowAffected  += cmd.ExecuteNonQuery();
             //A connection should be closed after operations.
             conn.Close();
+
+            return rowAffected;
         }
 
 
@@ -152,8 +156,8 @@ namespace VoicePay.DAL
             SqlCommand cmd = conn.CreateCommand();
 
             // Specify the SQL statement to count the number of parcels with the given delivery status for the given delivery man
-            cmd.CommandText = @"SELECT COUNT(*) FROM Parcel
-                        WHERE AccId = @AccId";
+            cmd.CommandText = @"SELECT COUNT(*) FROM Inventory
+                                WHERE AccId = @AccId";
 
             // Add the parameters for the deliveryManID and deliveryStatus
             cmd.Parameters.AddWithValue("@AccId", AccId);
@@ -168,6 +172,27 @@ namespace VoicePay.DAL
             conn.Close();
 
             return itemCounts;
+        }
+
+        public int Delete(int InventoryID, string AccId)
+        {
+            //Instantiate a SqlCommand object, supply it with a DELETE SQL statement
+            //to delete a staff record specified by a Staff ID
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = @"DELETE FROM Inventory
+                                WHERE InventoryID = @selectInventoryID
+                                AND AccId = @selectAccId";
+            cmd.Parameters.AddWithValue("@selectInventoryID", InventoryID);
+            cmd.Parameters.AddWithValue("@selectAccId", AccId);
+            //Open a database connection
+            conn.Open();
+            int rowAffected = 0;
+            //Execute the DELETE SQL to remove the staff record
+            rowAffected += cmd.ExecuteNonQuery();
+            //Close database connection
+            conn.Close();
+            //Return number of row of staff record updated or deleted
+            return rowAffected;
         }
 
     }
