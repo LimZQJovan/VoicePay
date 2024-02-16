@@ -1,13 +1,14 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
 .table-responsive {
     position: relative;
     z-index: 1;
 }
 
-.table-responsive table {
-    width: 100%;
-    border-collapse: collapse;
-}
+    .table-responsive table {
+        width: 100%;
+        border-collapse: collapse;
+    }
 
 /* Add these styles for the button */
 button {
@@ -52,6 +53,7 @@ button {
     overflow-x: auto;
     white-space: nowrap;
 }
+
 .date-filter-container {
     display: flex;
     flex-wrap: wrap;
@@ -96,6 +98,7 @@ button {
         margin-bottom: 10px; /* Adjust spacing between columns */
     }
 }
+
 button {
     margin-top: 5px;
     width: auto; /* Change width to auto to make it adjust based on content */
@@ -112,7 +115,7 @@ body {
     font-family: "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    max-width:100%
+    max-width: 100%
 }
 
 /* Responsive font size for small screens */
@@ -121,7 +124,9 @@ body {
     .table-responsive td {
         font-size: 13px;
     }
+
     button {
-        width: 100%; /* Make the button full width on smaller screens */
+        width: 100%; /* Make the button full width on smaller screens */
+            
     }
 }

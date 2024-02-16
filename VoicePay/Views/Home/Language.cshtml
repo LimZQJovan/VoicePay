@@ -15,7 +15,6 @@
             new google.translate.TranslateElement({
                 pageLanguage: 'en',
                 includedLanguages: 'en,zh-CN,zh-TW,ta,ms',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
             }, 'google_translate_element');
 
             // Center the translate element after it is loaded
@@ -36,8 +35,8 @@
 
             // Adjust for mobile view
             if (window.innerWidth <= 768) {
-                translateElement.style.width = '50%';
-                translateElement.style.setProperty('font-size', '500px', 'important'); // Adjust font size for mobile
+                translateElement.style.width = '80%'; // Adjusted width for better responsiveness
+                translateElement.style.setProperty('font-size', '16px', 'important'); // Adjust font size for mobile
             } else {
                 translateElement.style.width = ''; // Reset to default
                 translateElement.style.setProperty('font-size', '', 'important'); // Reset font size

@@ -12,6 +12,7 @@ using Stripe;
 using Stripe.Checkout;
 using System.Reflection.Metadata.Ecma335;
 
+
 namespace VoicePay.Controllers
 {
 
@@ -110,15 +111,19 @@ namespace VoicePay.Controllers
             return View("Admin");
         }
 
-        public ActionResult Report(string UEN, int selectedYear, int selectedMonth, int selectedDay)
+        public ActionResult Report(string UEN, int selectedYear = -1, int selectedMonth = 0, int selectedDay = 0)
         {
-            int dtYear = selectedYear == -1 ? DateTime.Now.Year : selectedYear;
-            int dtMonth = selectedMonth;
-            int dtDay = selectedDay;
-            UEN = HttpContext.Session.GetString("UEN");
+            int dtYear = selectedYear <= 0 ? DateTime.Now.Year : selectedYear;
+            int dtMonth = selectedMonth <= 0 ? DateTime.Now.Month : selectedMonth;
+            int dtDay = selectedDay <= 0 ? DateTime.Now.Day : selectedDay;
+
+            UEN = string.IsNullOrEmpty(UEN) ? HttpContext.Session.GetString("UEN") : UEN;
+
             List<Transaction> transactionList = transactionContext.GetTransactions(UEN, dtYear, dtMonth, dtDay);
+
             return View(transactionList);
         }
+
 
         public ActionResult Inventory()
         {

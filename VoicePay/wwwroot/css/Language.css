@@ -1,35 +1,34 @@
-body {
-    display: flex;
-    flex-direction: column; /* Stack elements vertically */
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+/* Style the language dropdown list */
+body #google_translate_element .goog-te-combo {
+    color: #fff;
+    background-color: #04AA6d;
+    border: none;
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s ease;
 }
 
-header {
-    /* Your styling for the navigation bar goes here */
+body #google_translate_element .goog-te-combo-arrow {
+    border-color: #fff transparent transparent transparent;
 }
 
-.center {
-    text-align: center;
-    margin-top: 20px; /* Adjust margin-top as needed */
+/* Style the dropdown options */
+body #google_translate_element .goog-te-menu-value,
+body #google_translate_element .goog-te-menu2-item {
+    color: #333;
+    background-color: #04AA6d;
+    border-bottom: 1px solid #ddd;
+    padding: 12px;
+    font-size: 16px;
 }
 
-#google_translate_element {
-    max-width: 100%; /* Ensure it doesn't exceed the screen width */
-}
-
-/* Media query for mobile view */
-@media (max-width: 768px) {
-    #google_translate_element {
-        width: 80%; /* Adjust width for smaller screens */
+    body #google_translate_element .goog-te-menu2-item:last-child {
+        border-bottom: none;
     }
-}
 
-.center-content {
-    /* Additional styling for centering the main content below the navigation bar */
-    flex-grow: 1; /* Take up remaining vertical space */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    body #google_translate_element .goog-te-menu2-item:hover {
+        background-color: #026246;
+    }

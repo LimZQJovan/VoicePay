@@ -12,7 +12,7 @@
         <div class="calculator">
             <form>
                 <div class="display">
-                    <input type="text" name="display" style="margin-right: 50px;" readonly>
+                    <input type="text" name="display"  readonly>
                 </div>
                 <div class="display-result">
                     <input type="text" name="display-result" style="width: 95%;" value=0 readonly>
@@ -41,9 +41,9 @@
                     <input type="button" value="Done" onclick="calculateAndRedirect()" style="background-color: #04AA6D; color: white;" class="equal operator">
                 </div>
                 <div>
-                    <div>
+                    <div class="button-container">
                         <input type="button" id="custombutton" style="width: 65%; color: white; background-color: cadetblue;" class="TA notranslate">
-                        <input type="button" value="Edit" onclick="window.location.href='NumberPadCustomise'" style="width: 40%; color: white; background-color: cadetblue;" class="material-symbols-outlined edit notranslate">
+                        <input type="button" id="edit" value="Edit" onclick="window.location.href='NumberPadCustomise'" style="width: 40%; color: white; background-color: cadetblue;" class="material-symbols-outlined edit notranslate">
                     </div>
                 </div>
             </form>
